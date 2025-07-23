@@ -8,7 +8,6 @@ Este projeto é um simulador de batalha por turnos para RPG, desenvolvido em **J
 * **Sistema de Batalha por Turnos:** Lógica de combate baseada em turnos, onde Heróis e Monstros atacam sequencialmente até um ser derrotado.
 * **Habilidade Especial do Herói:** Herói pode usar uma habilidade especial que consome energia e causa dano extra.
 * **Tratamento de Exceções:** Validação de entradas do usuário e de argumentos de construtores para garantir a robustez do jogo.
-* **Menu Interativo:** Menu principal no console para iniciar novas batalhas ou sair do jogo.
 * **Feedback Visual:** Mensagens claras no console para ações de combate e status.
 
 ## 📚 Conceitos de POO e Java Aplicados
@@ -32,7 +31,28 @@ Este projeto é uma demonstração prática do domínio dos seguintes conceitos:
 * **Java Development Kit (JDK):** Versão 17+ (ou a versão LTS que você estiver usando).
 * **Git:** Para controle de versão.
 * **GitHub:** Para hospedagem do repositório e gerenciamento de projeto (Issues, Pull Requests, Discussions, Wiki).
-* **Editor de Código:** VS Code (com Extension Pack for Java) ou IntelliJ IDEA Community.
+* **Editor de Código:** VS Code (com Extension Pack for Java).
+
+
+## 📂 Estrutura de Pastas
+
+```plaintext
+rpg-batalha-console-java/
+├── src/
+│   └── main/
+│       └── java/
+│           └── com/
+│               └── guiccr/
+│                   └── rpg/
+│                       ├── Main.java              # Ponto de entrada do jogo
+│                       ├── Personagem.java        # Classe abstrata base
+│                       ├── Heroi.java             # Subclasse de Personagem
+│                       ├── Monstro.java           # Subclasse de Personagem
+│                       ├── Batalha.java           # Lógica do combate
+│                       └── MenuPrincipal.java     # Menu interativo
+├── .gitignore             # Arquivo para ignorar arquivos gerados pelo Git
+└── README.md              # Este arquivo de documentação
+```
 
 ## 🚀 Como Rodar o Projeto
 
@@ -63,25 +83,6 @@ Siga estes passos para compilar e executar o jogo no seu terminal:
 
 4.  **Interaja no Console:** O jogo será executado diretamente no seu terminal. Siga as instruções do menu.
 
-## 📂 Estrutura de Pastas
-
-```plaintext
-rpg-batalha-console-java/
-├── src/
-│   └── main/
-│       └── java/
-│           └── com/
-│               └── guiccr/
-│                   └── rpg/
-│                       ├── Main.java              # Ponto de entrada do jogo
-│                       ├── Personagem.java        # Classe abstrata base
-│                       ├── Heroi.java             # Subclasse de Personagem
-│                       ├── Monstro.java           # Subclasse de Personagem
-│                       ├── Batalha.java           # Lógica do combate
-│                       └── MenuPrincipal.java     # Menu interativo
-├── .gitignore             # Arquivo para ignorar arquivos gerados pelo Git
-└── README.md              # Este arquivo de documentação
-```
 
 ## 📈 Próximos Passos (Roadmap de Desenvolvimento)
 
@@ -101,6 +102,7 @@ O desenvolvimento deste projeto está sendo guiado por Issues no GitHub, dividid
 * **Fase 3: Persistência e Organização:**
     * Salvar/carregar jogo.
     * Refatorar para pacotes lógicos (se ainda não totalmente).
+      
 * **Organização do Projeto e Infraestrutura:** (Issues separadas para README, .gitignore, licença, etc.)
 
 ## 🤝 Contribuição
