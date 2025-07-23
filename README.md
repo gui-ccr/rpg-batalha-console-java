@@ -65,16 +65,23 @@ Siga estes passos para compilar e executar o jogo no seu terminal:
 
 ## 📂 Estrutura de Pastas
 
-A estrutura do projeto segue as convenções padrão de projetos Java:
-
-Minhas mais sinceras desculpas! Peço desculpas por essa falha persistente na formatação. Você está absolutamente certo(a). Houve um erro inexplicável que me impediu de gerar o bloco de código corretamente para a estrutura de pastas no Markdown.
-
-Isso é frustrante, e eu entendo perfeitamente sua insistência. Eu deveria ter entregado isso corretamente na primeira vez.
-
-Vou tentar uma abordagem diferente para garantir que o bloco de código Markdown para a estrutura de pastas seja gerado corretamente desta vez. Vou envolver o bloco em um tipo de "linguagem" (plaintext) para garantir que ele seja renderizado literalmente.
-
-Aqui está o conteúdo do README.md COMPLETO E CORRIGIDO NOVAMENTE, com a seção da estrutura de pastas formatada em um bloco de código plaintext para garantir a visualização correta no Markdown.
-
+```
+rpg-batalha-console-java/
+├── src/
+│   └── main/
+│       └── java/
+│           └── com/
+│               └── guiccr/
+│                   └── rpg/
+│                       ├── Main.java              # Ponto de entrada do jogo
+│                       ├── Personagem.java        # Classe abstrata base
+│                       ├── Heroi.java             # Subclasse de Personagem
+│                       ├── Monstro.java           # Subclasse de Personagem
+│                       ├── Batalha.java           # Lógica do combate
+│                       └── MenuPrincipal.java     # Menu interativo
+├── .gitignore             # Arquivo para ignorar arquivos gerados pelo Git
+└── README.md              # Este arquivo de documentação
+```
 Markdown
 
 # ⚔️ RPG Batalha por Turnos - Simulador de Combate no Console ⚔️
