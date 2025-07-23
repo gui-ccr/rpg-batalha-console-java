@@ -8,6 +8,7 @@ public class Batalha {
     private Heroi heroi;
     private Monstro monstro;
     private Scanner scanner; // Para ler a entrada do usuário durante a batalha
+    private int turnos;
 
     // Construtor da batalha: recebe o herói e o monstro que vão lutar
     public Batalha(Heroi heroi, Monstro monstro) {
@@ -15,6 +16,7 @@ public class Batalha {
         if (heroi == null || monstro == null) {
             throw new IllegalArgumentException("Herói e Monstro não podem ser nulos para iniciar a batalha.");
         }
+        this.turnos = 0;
         this.heroi = heroi;
         this.monstro = monstro;
         this.scanner = new Scanner(System.in); // Inicializa o Scanner para entrada do console
@@ -27,16 +29,18 @@ public class Batalha {
 
         // Loop principal da batalha: continua enquanto ambos estiverem vivos
         while (heroi.estaVivo() && monstro.estaVivo()) {
+            turnos++;
             // Exibir o status atual de ambos os combatentes no início do turno
             System.out.println("\n--- Status Atual ---");
             heroi.exibirStatus();
             monstro.exibirStatus();
 
             // --- Turno do Herói ---
-            System.out.println("\n--- Turno de " + heroi.getNome() + " ---");
+            System.out.println("\n--- Turno #" + turnos + " de " + heroi.getNome() + " ---");
             exibirMenuHeroi();
             int escolha = 0;
             boolean entradaValida = false;
+            
 
             // Loop para garantir uma entrada válida do usuário (Tratamento de Exceções)
             while (!entradaValida) {
@@ -72,7 +76,7 @@ public class Batalha {
             }
 
             // --- Turno do Monstro (se o monstro ainda estiver vivo) ---
-            System.out.println("\n--- Turno de " + monstro.getNome() + " ---");
+            System.out.println("\n--- Turno #" + turnos + " de " + monstro.getNome() + " ---");
             monstro.atacar(heroi); // Monstro ataca automaticamente o herói
 
             // Verificar se o herói foi derrotado após o ataque do monstro
@@ -80,6 +84,7 @@ public class Batalha {
                 System.out.println("\n" + heroi.getNome() + " foi derrotado!");
                 break; // Sai do loop principal da batalha
             }
+            
         } // Fim do loop while
 
         // --- Resultado Final da Batalha ---
@@ -92,6 +97,10 @@ public class Batalha {
             System.out.println("EMPATE! Ambos os combatentes caíram."); // Caso ambos sejam derrotados no mesmo turno
         }
 
+        System.out.println("\n --- RELATORIO DE BATALHA ---");
+        System.out.println("\n A batalha teve um total de #" + turnos + " turnos...." + 
+                            "\n Vida Atual do " + heroi.getNome() + " HP:(" + heroi.getVidaAtual() + "/" + heroi.getVidaMaxima() + ")" +
+                            "\n Vida Atual do " + monstro.getNome() + " HP:(" + monstro.getVidaAtual() + "/" + monstro.getVidaMaxima() + ")");
         scanner.close(); // Fecha o scanner para liberar recursos
     }
 
