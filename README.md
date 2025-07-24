@@ -102,9 +102,9 @@ rpg-batalha-console-java/
 O desenvolvimento deste projeto está sendo guiado por Issues no GitHub, dividido em fases:
 
 * **Fase 1: Refinamento e Usabilidade:** (Em andamento)
-    * Gerar relatórios de batalha.
+    - [x] Gerar relatórios de batalha.
     * Refinar validação de entrada de combate.
-    * Adicionar sistema de nomes dinâmicos.
+    - [x] Adicionar sistema de nomes dinâmicos.
     * Implementar chance de crítico e esquiva.
     * Melhorar exibição visual.
 * **Fase 2: Expansão da POO e Complexidade de Jogo:**
