@@ -3,10 +3,13 @@ package com.guiccr.rpg;
 public class Main{
     public static void main(String[] args) {
 
+        String nomeAleatorioHeroi = GeradorDeNomes.gerarNomeHerois();
+        String nomeAleatorioMonstro = GeradorDeNomes.gerarNomeMonstro();
+        
         System.out.println("--- RPG de Batalha por Turnos ---");
 
-        Heroi heroi_principal = new Heroi("Guilherme o Forte", 100, 20, 10, 45);
-        Monstro monstro_g0 = new Monstro("Goblin da Floresta", 80, 15, 5, "Goblin");
+        Heroi heroi_principal = new Heroi(nomeAleatorioHeroi, 100, 20, 10, 45);
+        Monstro monstro_g0 = new Monstro(nomeAleatorioMonstro, 80, 15, 5, "Goblin");
 
 
         // Exibindo os status dos personagens 
