@@ -12,9 +12,15 @@ public abstract class Personagem {
     private int vidaMaxima;
     private int ataque;
     private int defesa;
-    
+
+    // NOVOS ATRIBUTOS para Crítico e Esquiva
+    private int chanceCritico; // Porcentagem (0-100)
+    private double multiplicadorCritico; // Ex: 1.5, 2.0
+    private int chanceEsquiva; // Porcentagem (0-100)
+
+
     // construtor inicial do personagem pede nome a vida, ataque e defesa
-    public Personagem(String nome, int vidaMaxima, int ataque, int defesa){
+    public Personagem(String nome, int vidaMaxima, int ataque, int defesa, int chanceCritico, double multiplicadorCritico, int chanceEsquiva){
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
         }
@@ -27,11 +33,23 @@ public abstract class Personagem {
         if (defesa < 0) {
             throw new IllegalArgumentException("Defesa não pode ser negativa.");
         }
+        if (chanceCritico < 0 || chanceCritico > 100) {
+        throw new IllegalArgumentException("Chance de crítico deve ser entre 0 e 100.");
+        }
+        if (chanceEsquiva < 0 || chanceEsquiva > 100) {
+        throw new IllegalArgumentException("Chance de esquiva deve ser entre 0 e 100.");
+        }
+        if (multiplicadorCritico < 1.0) {
+        throw new IllegalArgumentException("multiplicador de Critico deve ser no minimo 1.0.");
+        }
         this.nome = nome;
-        this.vidaAtual = vidaMaxima;
         this.vidaMaxima = vidaMaxima;
+        this.vidaAtual = vidaMaxima;
         this.ataque = ataque;
         this.defesa = defesa;
+        this.chanceCritico = chanceCritico;
+        this.multiplicadorCritico = multiplicadorCritico;
+        this.chanceEsquiva = chanceEsquiva;
     }
 
     /*
@@ -39,21 +57,17 @@ public abstract class Personagem {
      * nao vou precisar de setter porque vou alterar os atributos internamente
      * eles vao ser alterados por outros metodos como "receber dano"
      */
-    public String getNome(){
-        return this.nome;
-    }
-    public int getVidaAtual(){
-        return this.vidaAtual;
-    }
-    public int getVidaMaxima(){
-        return this.vidaMaxima;
-    }
-    public int getAtaque(){
-        return this.ataque;
-    }
-    public int getDefesa(){
-        return this.defesa;
-    }
+    // --- Métodos Getters ---
+    public String getNome() { return this.nome; }
+    public int getVidaAtual() { return this.vidaAtual; }
+    public int getVidaMaxima() { return this.vidaMaxima; }
+    public int getAtaque() { return this.ataque; }
+    public int getDefesa() { return this.defesa; }
+
+    // NOVOS GETTERS para atributos de Crítico e Esquiva
+    public int getChanceCritico() { return this.chanceCritico; }
+    public double getMultiplicadorCritico() { return this.multiplicadorCritico; }
+    public int getChanceEsquiva() { return this.chanceEsquiva; }
 
     // === Metodos de Comportamento ====
 
@@ -77,7 +91,23 @@ public abstract class Personagem {
     public abstract void atacar(Personagem alvo);
 
     // Metodo concreto: exibe os status atuais do personagem
-    public void exibirStatus(){
-        System.out.println(this.nome + " | Vida: " + this.vidaAtual + "/" + this.vidaMaxima + " | Atk: " + this.ataque + " | Def: " + this.defesa);
+    public void exibirStatus() {
+        System.out.println(this.nome + " | Vida: " + this.vidaAtual + "/" + this.vidaMaxima +
+                           " | Atk: " + this.ataque + " | Def: " + this.defesa +
+                           " | Crítico: " + this.chanceCritico + "% | Esquiva: " + this.chanceEsquiva + "%"); // Exibir novos stats
+    }
+
+    // --- NOVOS MÉTODOS AUXILIARES para Crítico e Esquiva ---
+    // Métodos auxiliares concretos para calcular a chance (herdados por Heroi e Monstro)
+
+    public boolean tentarCritico(){
+        // Gera um número aleatório entre 0.0 (inclusive) e 1.0 (exclusivo)
+        // Multiplica por 100 para ter um número entre 0 e 99.99...
+        // Compara com a chanceCritico do personagem
+        return Math.random() * 100 < this.chanceCritico;
+    }
+
+    public boolean tentarEsquiva(){
+        return Math.random() * 100 < this.chanceEsquiva;
     }
 }
