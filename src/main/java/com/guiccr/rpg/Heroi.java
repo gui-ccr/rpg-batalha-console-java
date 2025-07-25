@@ -17,12 +17,16 @@ public class Heroi extends Personagem {
     {
         // Chama o construtor da superclasse. As validações básicas já são feitas lá.
         super(nome, vidaMaxima, ataque, defesa, chanceCritico, multiplicadorCritico, chanceEsquiva);
+        this.energia = energiaInicial;
 
         // Validação específica para o Herói: energia inicial
         if (energiaInicial < 0) 
         {
             throw new IllegalArgumentException("Energia inicial não pode ser negativa.");
         }
+
+
+
         // Validações e inicializações para os atributos de Ordem Paranormal.
         // Cada atributo não deve ser negativo.
         // if (forca < 0 || agilidade < 0 || vigor < 0 || presenca < 0 || intelecto < 0) {
@@ -50,7 +54,7 @@ public class Heroi extends Personagem {
         
         // logica da esquiva
         if (alvo.tentarEsquiva()) {
-            System.out.println(alvo.getNome() + "Esquivou do ataque!");
+        System.out.println(ConsoleColors.CYAN + alvo.getNome() + " esquivou do ataque!" + ConsoleColors.RESET);
             return; // o ataque nao causa dano
         }
         
@@ -59,7 +63,7 @@ public class Heroi extends Personagem {
 
         if (this.tentarCritico()) {
             danoCausado = (int) (danoCausado * this.getMultiplicadorCritico());
-            System.out.println(this.getNome() + "acertou um GOLPE CRÍTICO!!");
+            System.out.println(ConsoleColors.YELLOW + ConsoleColors.BOLD + this.getNome() + " acertou um GOLPE CRÍTICO!!" + ConsoleColors.RESET);
         }
 
         // Lógica de dano mínimo:
@@ -77,7 +81,7 @@ public class Heroi extends Personagem {
     // Método específico do Herói: usarHabilidadeEspecial
     public void usarHabilidadeEspecial(Personagem alvo) { // O parâmetro deve ser do tipo Personagem.
         if (this.energia >= 10) { // Custo de energia para a habilidade
-            System.out.println(this.getNome() + " usa uma habilidade especial em " + alvo.getNome() + "!");
+            System.out.println(this.getNome() + ConsoleColors.PURPLE + " usa uma habilidade especial em " + ConsoleColors.RESET + alvo.getNome() + "!");
             
             // Calcula o dano base: Dano dobrado do ataque do Herói - Defesa do Alvo
             int danoCausado = Math.max(0, this.getAtaque() * 2 - alvo.getDefesa());
