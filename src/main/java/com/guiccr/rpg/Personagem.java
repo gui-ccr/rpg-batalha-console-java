@@ -92,9 +92,21 @@ public abstract class Personagem {
 
     // Metodo concreto: exibe os status atuais do personagem
     public void exibirStatus() {
-        System.out.println(this.nome + " | Vida: " + this.vidaAtual + "/" + this.vidaMaxima +
-                           " | Atk: " + this.ataque + " | Def: " + this.defesa +
-                           " | Crítico: " + this.chanceCritico + "% | Esquiva: " + this.chanceEsquiva + "%"); // Exibir novos stats
+    final int COMPRIMENTO_BARRA_HP = 20;
+    double porcentagemVida = (double) this.getVidaAtual() / this.getVidaMaxima();
+    int partesPreenchidas = (int) (porcentagemVida * COMPRIMENTO_BARRA_HP);
+    int partesVazias = (int) COMPRIMENTO_BARRA_HP - partesPreenchidas;
+
+    StringBuilder barraConstruida = new StringBuilder();
+    for (int i = 0; i < partesPreenchidas; i++){
+        barraConstruida.append("█"); 
+    }
+    // Loop para adicionar os caracteres vazios
+    for (int i = 0; i < partesVazias; i++) {
+    barraConstruida.append("-");
+    }
+    String barraFinal = "[" + barraConstruida.toString() + "]"; // Converte para String no final
+    System.out.println(this.getNome() + " HP: " + barraFinal + " (" + this.getVidaAtual() + "/" + this.getVidaMaxima() + ")");
     }
 
     // --- NOVOS MÉTODOS AUXILIARES para Crítico e Esquiva ---
