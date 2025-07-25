@@ -5,11 +5,32 @@ public class Main{
 
         String nomeAleatorioHeroi = GeradorDeNomes.gerarNomeHerois();
         String nomeAleatorioMonstro = GeradorDeNomes.gerarNomeMonstro();
+
+        
+        
         
         System.out.println("--- RPG de Batalha por Turnos ---");
 
-        Heroi heroi_principal = new Heroi(nomeAleatorioHeroi, 100, 20, 10, 45);
-        Monstro monstro_g0 = new Monstro(nomeAleatorioMonstro, 80, 15, 5, "Goblin");
+        Heroi heroi_principal = new Heroi(
+        nomeAleatorioHeroi,
+        100,
+        20,
+        10, 
+        13,
+        1.5,
+        12,
+        20
+        );
+        Monstro monstro_g0 = new Monstro(
+        nomeAleatorioMonstro,
+        130,
+        15,
+        5,
+        "Goblin",
+        8,
+        1.2,
+        10
+        );
 
 
         // Exibindo os status dos personagens 
