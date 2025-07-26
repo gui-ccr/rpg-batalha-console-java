@@ -16,9 +16,9 @@ public class Main{
         100,
         20,
         10, 
-        13,
+        100,
         1.5,
-        12,
+        0,
         20
         );
         Monstro monstro_g0 = new Monstro(

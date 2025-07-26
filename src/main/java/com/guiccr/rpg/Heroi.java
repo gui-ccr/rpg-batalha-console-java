@@ -94,6 +94,11 @@ public class Heroi extends Personagem {
             } else if (this.getAtaque() == 0) {
                 danoCausado = 0;
             }
+
+            if (this.tentarCritico()) {
+            danoCausado = (int) (danoCausado * this.getMultiplicadorCritico());
+            System.out.println(ConsoleColors.CYAN_BRIGHT + ConsoleColors.BOLD + this.getNome() + ConsoleColors.RESET + ConsoleColors.YELLOW + " acertou um GOLPE CRÍTICO!!" + ConsoleColors.RESET);
+        }
             
             alvo.receberDano(danoCausado);
             this.energia -= 10;

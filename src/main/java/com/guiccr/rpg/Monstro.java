@@ -28,7 +28,7 @@ public class Monstro extends Personagem {
 
         // Lógica da Esquiva: Alvo tenta esquivar
         if (alvo.tentarEsquiva()) {
-            System.out.println(ConsoleColors.BLACK + alvo.getNome() + ConsoleColors.RESET +" esquivou do ataque!");
+            System.out.println(ConsoleColors.CYAN_BRIGHT + alvo.getNome() + ConsoleColors.RESET + " esquivou do ataque!");
             return; // O ataque não causa dano
         }
         // Calcula o dano base: Ataque do Monstro - Defesa do Alvo
@@ -45,7 +45,7 @@ public class Monstro extends Personagem {
         // Lógica de Crítico: Atacante tenta um crítico
         if (this.tentarCritico()) {
             danoCausado = (int) (danoCausado * this.getMultiplicadorCritico());
-            System.out.println(ConsoleColors.BLACK +this.getNome() + ConsoleColors.RESET + " acertou um GOLPE CRÍTICO!");
+            System.out.println(ConsoleColors.BLACK +this.getNome() + ConsoleColors.RESET + " acertou um "+ ConsoleColors.YELLOW  + " GOLPE CRÍTICO!");
         }
 
         alvo.receberDano(danoCausado);

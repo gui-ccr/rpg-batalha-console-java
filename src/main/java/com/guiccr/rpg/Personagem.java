@@ -101,7 +101,10 @@ public abstract class Personagem {
         if (this.vidaAtual <= 0) {
             this.vidaAtual = 0;
         }
-        System.out.println(this.nome + ConsoleColors.RED + " recebeu " + dano + " de dano. Vida Atual: " + ConsoleColors.GREEN + this.vidaAtual + ConsoleColors.RESET);
+
+        
+
+        System.out.println(this.nome + ConsoleColors.RED + " recebeu " + dano + " de dano." + ConsoleColors.RESET + " Vida Atual: " + ConsoleColors.GREEN + this.vidaAtual + ConsoleColors.RESET);
     }
 
     // metodo concreto: verifica se o personagem está vivo com um if simples
