@@ -1,6 +1,5 @@
 package com.guiccr.rpg;
 
-import java.io.Console;
 
 public class Heroi extends Personagem {
 

@@ -1,7 +1,5 @@
 package com.guiccr.rpg;
 
-import com.guiccr.rpg.ConsoleColors;
-
 // A classe personagem é abstrata porque ela vai definir atributos e metodos gerais de todos os personagens
 // no caso suas subclasses (Heroi, Monstro) devem implementar esses componentes
 public abstract class Personagem {
@@ -102,7 +100,7 @@ public abstract class Personagem {
             this.vidaAtual = 0;
         }
 
-        
+
 
         System.out.println(this.nome + ConsoleColors.RED + " recebeu " + dano + " de dano." + ConsoleColors.RESET + " Vida Atual: " + ConsoleColors.GREEN + this.vidaAtual + ConsoleColors.RESET);
     }
