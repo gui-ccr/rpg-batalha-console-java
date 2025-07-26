@@ -23,12 +23,12 @@ public class Monstro extends Personagem {
     // --- Implementação do Método Abstrato 'atacar()' herdado de Personagem ---
     @Override
     public void atacar(Personagem alvo) { 
-        System.out.println("\n" + this.getNome() + " (" + this.getTipo() + ") ataca " + alvo.getNome() + "!");
+        System.out.println("\n" + ConsoleColors.BLACK + this.getNome() + " (" + this.getTipo() + ")" + ConsoleColors.RESET + " ataca " + ConsoleColors.CYAN_BRIGHT +alvo.getNome() + ConsoleColors.RESET +"!");
 
 
         // Lógica da Esquiva: Alvo tenta esquivar
         if (alvo.tentarEsquiva()) {
-            System.out.println(alvo.getNome() + " esquivou do ataque!");
+            System.out.println(ConsoleColors.BLACK + alvo.getNome() + ConsoleColors.RESET +" esquivou do ataque!");
             return; // O ataque não causa dano
         }
         // Calcula o dano base: Ataque do Monstro - Defesa do Alvo
@@ -45,7 +45,7 @@ public class Monstro extends Personagem {
         // Lógica de Crítico: Atacante tenta um crítico
         if (this.tentarCritico()) {
             danoCausado = (int) (danoCausado * this.getMultiplicadorCritico());
-            System.out.println(this.getNome() + " acertou um GOLPE CRÍTICO!");
+            System.out.println(ConsoleColors.BLACK +this.getNome() + ConsoleColors.RESET + " acertou um GOLPE CRÍTICO!");
         }
 
         alvo.receberDano(danoCausado);

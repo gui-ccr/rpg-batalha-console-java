@@ -1,5 +1,7 @@
 package com.guiccr.rpg;
 
+import java.io.Console;
+
 public class Heroi extends Personagem {
 
     private int energia;
@@ -50,11 +52,11 @@ public class Heroi extends Personagem {
     // --- Implementação do Método Abstrato 'atacar()' herdado de Personagem ---
     @Override 
     public void atacar(Personagem alvo) { // O parâmetro deve ser do tipo Personagem.
-        System.out.println("\n" + this.getNome() + " ataca " + alvo.getNome() + "!");
+        System.out.println("\n"+ ConsoleColors.CYAN_BRIGHT + this.getNome() + ConsoleColors.RESET + " ataca " + ConsoleColors.BLACK + alvo.getNome() + ConsoleColors.RESET+ "!");
         
         // logica da esquiva
         if (alvo.tentarEsquiva()) {
-        System.out.println(ConsoleColors.CYAN + alvo.getNome() + " esquivou do ataque!" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.BLUE + alvo.getNome() + " esquivou do ataque!" + ConsoleColors.RESET);
             return; // o ataque nao causa dano
         }
         
@@ -63,7 +65,7 @@ public class Heroi extends Personagem {
 
         if (this.tentarCritico()) {
             danoCausado = (int) (danoCausado * this.getMultiplicadorCritico());
-            System.out.println(ConsoleColors.YELLOW + ConsoleColors.BOLD + this.getNome() + " acertou um GOLPE CRÍTICO!!" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.CYAN_BRIGHT + ConsoleColors.BOLD + this.getNome() + ConsoleColors.RESET + ConsoleColors.YELLOW + " acertou um GOLPE CRÍTICO!!" + ConsoleColors.RESET);
         }
 
         // Lógica de dano mínimo:
@@ -81,7 +83,7 @@ public class Heroi extends Personagem {
     // Método específico do Herói: usarHabilidadeEspecial
     public void usarHabilidadeEspecial(Personagem alvo) { // O parâmetro deve ser do tipo Personagem.
         if (this.energia >= 10) { // Custo de energia para a habilidade
-            System.out.println(this.getNome() + ConsoleColors.PURPLE + " usa uma habilidade especial em " + ConsoleColors.RESET + alvo.getNome() + "!");
+            System.out.println( ConsoleColors.CYAN_BRIGHT + this.getNome() + ConsoleColors.RESET + " usa uma " + ConsoleColors.PURPLE + " habilidade especial " + ConsoleColors.RESET + " em " + ConsoleColors.BLACK + alvo.getNome() +  ConsoleColors.RESET + "!");
             
             // Calcula o dano base: Dano dobrado do ataque do Herói - Defesa do Alvo
             int danoCausado = Math.max(0, this.getAtaque() * 2 - alvo.getDefesa());
@@ -95,9 +97,9 @@ public class Heroi extends Personagem {
             
             alvo.receberDano(danoCausado);
             this.energia -= 10;
-            System.out.println("Energia de " + this.getNome() + " atual: " + this.energia);
+            System.out.println("Energia de " + ConsoleColors.CYAN_BRIGHT + this.getNome() + ConsoleColors.RESET + " atual: "+ ConsoleColors.PURPLE_BRIGHT + this.energia + ConsoleColors.RESET);
         } else {
-            System.out.println(this.getNome() + " não tem energia suficiente para usar a habilidade especial!");
+            System.out.println( ConsoleColors.CYAN_BRIGHT + this.getNome() + ConsoleColors.RESET + " não tem energia suficiente para usar a habilidade especial!");
         }   
     }
 }

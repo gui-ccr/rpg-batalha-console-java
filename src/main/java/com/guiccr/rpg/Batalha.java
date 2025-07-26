@@ -38,7 +38,7 @@ public class Batalha {
         System.out.println("\n=========================================");
         System.out.println("          A BATALHA COMEÇA!");
         System.out.println("=========================================");
-        System.out.println(heroi.getNome() + " vs " + monstro.getNome() + " (" + monstro.getTipo() + ")!");
+        System.out.println(ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET+ " vs " + ConsoleColors.BLACK + monstro.getNome() + " (" + monstro.getTipo() + ")" + ConsoleColors.RESET + "!");
         pausar(3000); // Pausa inicial
 
         // Loop principal da batalha: continua enquanto ambos estiverem vivos
@@ -54,7 +54,7 @@ public class Batalha {
             pausar(3000); // Pausa para leitura dos status
 
             // --- Turno do Herói ---
-            System.out.println("\n--- VEZ DE " + heroi.getNome().toUpperCase() + " ---");
+            System.out.println("\n--- VEZ DE " + ConsoleColors.CYAN_BRIGHT + heroi.getNome().toUpperCase() + ConsoleColors.RESET +" ---");
             exibirMenuHeroi();
             int escolha = 0;
             boolean entradaValida = false;
@@ -85,8 +85,8 @@ public class Batalha {
                     if (heroi.getEnergia() >= 10) {
                         heroi.usarHabilidadeEspecial(monstro);
                     } else {
-                        System.out.println(heroi.getNome() + " não tem energia suficiente. Atacando normalmente.");
-                        heroi.atacar(monstro); // Ataca normalmente se não tiver energia
+                        System.out.println(ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + " não tem energia suficiente.");
+                        // se não tiver energia nao ataca
                     }
                     break;
             }
@@ -94,18 +94,18 @@ public class Batalha {
 
             // Verificar se o monstro foi derrotado após o ataque do herói
             if (!monstro.estaVivo()) {
-                System.out.println("\n" + monstro.getNome() + " foi derrotado!");
+                System.out.println("\n" + ConsoleColors.BLACK + monstro.getNome()+ ConsoleColors.RESET + " foi derrotado!");
                 break; // Sai do loop principal da batalha
             }
 
             // --- Turno do Monstro (se o monstro ainda estiver vivo) ---
-            System.out.println("\n--- VEZ DE " + monstro.getNome().toUpperCase() + " ---");
+            System.out.println("\n--- VEZ DE " + ConsoleColors.BLACK + monstro.getNome().toUpperCase() + ConsoleColors.RESET + " ---");
             monstro.atacar(heroi); // Monstro ataca automaticamente o herói
             pausar(4000); // Pausa após a ação do monstro
 
             // Verificar se o herói foi derrotado após o ataque do monstro
             if (!heroi.estaVivo()) {
-                System.out.println("\n" + heroi.getNome() + " foi derrotado!");
+                System.out.println("\n" + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + " foi derrotado!");
                 break; // Sai do loop principal da batalha
             }
             // Não precisa de 'turnos++;' aqui, já está no início do loop.
@@ -116,9 +116,9 @@ public class Batalha {
         System.out.println("          FIM DA BATALHA!");
         System.out.println("=========================================");
         if (heroi.estaVivo()) {
-            System.out.println("🎉 VITÓRIA! " + heroi.getNome() + " derrotou " + monstro.getNome() + "!");
+            System.out.println("🎉 VITÓRIA! "+ ConsoleColors.CYAN_BRIGHT + heroi.getNome() + " derrotou " + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET + "!");
         } else if (monstro.estaVivo()) {
-            System.out.println("💀 DERROTA! " + monstro.getNome() + " derrotou " + heroi.getNome() + ".");
+            System.out.println("💀 DERROTA! "+ ConsoleColors.BLACK + monstro.getNome() + " derrotou "+ ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + ".");
         } else {
             System.out.println("🤝 EMPATE! Ambos os combatentes caíram."); // Caso ambos sejam derrotados no mesmo turno
         }

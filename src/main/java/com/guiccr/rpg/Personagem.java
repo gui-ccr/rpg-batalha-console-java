@@ -147,7 +147,8 @@ public abstract class Personagem {
                   corVida, // Para a parte numérica da vida também ter a cor
                   this.getVidaAtual(),
                   this.getVidaMaxima(),
-                  ConsoleColors.RESET); // Garante que tudo reseta no final da linha
+                  ConsoleColors.RESET); 
+                  // Garante que tudo reseta no final da linha
         // System.out.println(" | Atk: " + this.ataque + " | Def: " + this.defesa +
         // " | Crítico: " + this.chanceCritico + "% | Esquiva: " + this.chanceEsquiva +
         // "%");

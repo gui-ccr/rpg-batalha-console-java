@@ -26,7 +26,7 @@ public class Main{
         130,
         15,
         5,
-        "Goblin",
+        "Criatura",
         8,
         1.2,
         10
