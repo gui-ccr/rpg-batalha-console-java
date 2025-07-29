@@ -67,10 +67,10 @@ public class Batalha {
                     if (escolha >= 1 && escolha <= 2) {
                         entradaValida = true;
                     } else {
-                        System.out.println("Opção inválida. Por favor, digite 1 (Atacar) ou 2 (Habilidade Especial).");
+                        System.out.println("Opção fora do esperado! Escolha 1 para Atacar ou 2 para Habilidade Especial.");
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println("Entrada inválida. Por favor, digite um número (1 ou 2).");
+                    System.out.println("Entrada inválida! Oque voce digitou não é um numero por favor, digite um número (1 ou 2).");
                     scanner.next(); // Limpa o buffer do scanner para evitar loop infinito
                 }
             }
