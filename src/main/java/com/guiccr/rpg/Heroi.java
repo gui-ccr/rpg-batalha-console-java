@@ -16,19 +16,7 @@ public class Heroi extends Personagem {
 
     public Heroi(String nome, int forca, int agilidade, int vigor, int presenca, int intelecto,
             int energiaInicial) {
-        // ====================================================================
-        // PASSO 1: CHAMADA AO CONSTRUTOR DA SUPERCLASSE (SUPER)
-        // ESTA DEVE SER A PRIMEIRA LINHA EXECUTÁVEL DO CONSTRUTOR.
-        // As validações e cálculos para 'super()' são feitos INLINE ou por métodos
-        // auxiliares.
-        // ====================================================================
-
-        // As validações para nome, vidaMaxima, ataque, defesa, crítico/esquiva
-        // serão feitas no construtor de Personagem.
-
-        // VALIDAÇÕES PARA OS ATRIBUTOS DE FORÇA/AGILIDADE/ETC. SÃO FEITAS
-        // POR MÉTODOS AUXILIARES QUE RETORNAM O PRÓPRIO ATRIBUTO OU LANÇAM EXCEÇÃO.
-        // Isso permite a validação antes do uso nos cálculos do 'super()'.
+        
 
         super(nome, // Nome do personagem
                 // Atributos calculados para Personagem, com validações embutidas nos métodos
@@ -40,12 +28,6 @@ public class Heroi extends Personagem {
                 calcularMultiplicadorCritico(intelecto),
                 calcularChanceEsquiva(agilidade, intelecto));
 
-        // ====================================================================
-        // PASSO 2: INICIALIZAÇÃO DOS ATRIBUTOS PRÓPRIOS DO HEROI
-        // ESTE BLOCO SÓ PODE VIR DEPOIS DA CHAMADA 'super()'.
-        // ====================================================================
-        // Atribuições dos atributos de Ordem Paranormal e energia (já validados pelos
-        // métodos auxiliares ou no super())
         this.energia = energiaInicial; // Assume que energiaInicial já foi validada indiretamente
         this.forca = forca;
         this.agilidade = agilidade;
