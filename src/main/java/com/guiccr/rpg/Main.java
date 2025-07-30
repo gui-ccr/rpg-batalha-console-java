@@ -6,11 +6,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); // Scanner criado UMA VEZ
         int escolhaMenu = 0;
-        
+
         do {
             String nomeAleatorioHeroi = GeradorDeNomes.gerarNomeHerois();
             String nomeAleatorioMonstro = GeradorDeNomes.gerarNomeMonstro();
-
 
             MenuPrincipal.exibirOpcoes(); // Exibe o menu principal
             escolhaMenu = MenuPrincipal.lerOpcao(scanner); // Lê a opção do usuário
@@ -21,26 +20,9 @@ public class Main {
                     MenuPrincipal.pausar(1000); // Pausa de 1 segundo
 
                     // Crie instâncias de Heroi e Monstro AQUI (usando GeradorDeNomes)
-                    Heroi heroi_principal = new Heroi(
-                    nomeAleatorioHeroi,
-                    100,
-                    20,
-                    10, 
-                    100,
-                    1.5,
-                    0,
-                    20
-                    );
-                    Monstro monstro_g0 = new Monstro(
-                    nomeAleatorioMonstro,
-                    130,
-                    15,
-                    5,
-                    "Criatura",
-                    8,
-                    1.2,
-                    10
-                    );
+                    Heroi heroi_principal = new Heroi(nomeAleatorioHeroi, 5, 3, 6, 3, 4, 20);
+                    Monstro monstro_g0 = new Monstro(nomeAleatorioMonstro, 130, 15, 5, "Criatura", 8, 1.2, 10);
+                    
                     System.out.println("\n--- Aventureiros e Monstro Preparados ---");
                     MenuPrincipal.pausar(1500); // Pausa para leitura
 
@@ -52,7 +34,8 @@ public class Main {
                     System.out.println("Saindo do jogo. Obrigado por jogar!");
                     break;
                 default:
-                    // Este caso dificilmente será alcançado devido à validação em MenuPrincipal.lerOpcao
+                    // Este caso dificilmente será alcançado devido à validação em
+                    // MenuPrincipal.lerOpcao
                     System.out.println("Opção inválida. Por favor, tente novamente.");
                     break;
             }
