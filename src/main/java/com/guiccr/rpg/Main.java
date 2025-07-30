@@ -20,9 +20,9 @@ public class Main {
                     MenuPrincipal.pausar(1000); // Pausa de 1 segundo
 
                     // Crie instâncias de Heroi e Monstro AQUI (usando GeradorDeNomes)
-                    Heroi heroi_principal = new Heroi(nomeAleatorioHeroi, 5, 3, 6, 3, 4, 20);
-                    Monstro monstro_g0 = new Monstro(nomeAleatorioMonstro, 130, 15, 5, "Criatura", 8, 1.2, 10);
-                    
+                    Heroi heroi_principal = new Heroi(nomeAleatorioHeroi, 12, 3, 6, 3, 4, 20);
+                    Monstro monstro_g0 = new Monstro(nomeAleatorioMonstro, 110, 20, 10, 10, 1.4, 15, "Criatura");
+
                     System.out.println("\n--- Aventureiros e Monstro Preparados ---");
                     MenuPrincipal.pausar(1500); // Pausa para leitura
 
