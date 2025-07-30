@@ -76,7 +76,6 @@ public abstract class Personagem {
         return this.defesa;
     }
 
-    // NOVOS GETTERS para atributos de Crítico e Esquiva
     public int getChanceCritico() {
         return this.chanceCritico;
     }
@@ -87,6 +86,60 @@ public abstract class Personagem {
 
     public int getChanceEsquiva() {
         return this.chanceEsquiva;
+    }
+
+    // --- Métodos Setters ---
+    public void setVidaAtual(int vidaAtual) {
+        if (vidaAtual < 0) {
+            throw new IllegalArgumentException("Vida atual não pode ser negativa.");
+        }
+        this.vidaAtual = Math.min(vidaAtual, this.vidaMaxima); // Garante que a vida não ultrapasse o máximo
+    }
+
+    public void setVidaMaxima(int novaVidaMaxima) {
+        if (novaVidaMaxima < 0) {
+            throw new IllegalArgumentException("Vida maxima não pode ser negativa");
+        }
+        this.vidaMaxima = novaVidaMaxima;
+        if (this.vidaAtual > this.vidaMaxima) {
+            this.vidaAtual = this.vidaMaxima;
+        }
+
+    }
+
+    public void setDefesa(int novaDefesa) {
+        if (novaDefesa < 0) {
+            throw new IllegalArgumentException("Defesa nao pode ser negativo.");
+        }
+        this.defesa = novaDefesa;
+    }
+
+    public void setAtaque(int novoAtaque) {
+        if (novoAtaque < 0) {
+            throw new IllegalArgumentException("Ataque nao pode ser negativo.");
+        }
+        this.ataque = novoAtaque;
+    }
+
+    public void setChanceCritico(int chanceCriticoAtual) {
+        if (chanceCriticoAtual < 0 || chanceCriticoAtual > 100) {
+            throw new IllegalArgumentException("Chance de Critico nao pode ser negativo e nem maior que 100%");
+        }
+        this.chanceCritico = chanceCriticoAtual;
+    }
+
+    public void setChanceEsquiva(int chanceEsquivaAtual) {
+        if (chanceEsquivaAtual < 0 || chanceEsquivaAtual > 100) {
+            throw new IllegalArgumentException("Chance de Esquiva nao pode ser negativo e  nem maior que 100%");
+        }
+        this.chanceEsquiva = chanceEsquivaAtual;
+    }
+
+    public void setMultiplicadorCritico(double multiplicadorCritico) {
+        if (multiplicadorCritico < 1.0) {
+            throw new IllegalArgumentException("Multiplicador de Critico nao pode ser menor que 1.0");
+        }
+        this.multiplicadorCritico = multiplicadorCritico;
     }
 
     // === Metodos de Comportamento ====
@@ -100,9 +153,8 @@ public abstract class Personagem {
             this.vidaAtual = 0;
         }
 
-
-
-        System.out.println(this.nome + ConsoleColors.RED + " recebeu " + dano + " de dano." + ConsoleColors.RESET + " Vida Atual: " + ConsoleColors.GREEN + this.vidaAtual + ConsoleColors.RESET);
+        System.out.println(this.nome + ConsoleColors.RED + " recebeu " + dano + " de dano." + ConsoleColors.RESET
+                + " Vida Atual: " + ConsoleColors.GREEN + this.vidaAtual + ConsoleColors.RESET);
     }
 
     // metodo concreto: verifica se o personagem está vivo com um if simples
@@ -143,13 +195,13 @@ public abstract class Personagem {
         }
         // Exibição mais detalhada e formatada
         System.out.printf("%-15s HP: %s%s (%d/%d)%s%n",
-                  this.getNome(),
-                  corVida + barraConstruida.toString() + ConsoleColors.RESET, // Barra colorida
-                  corVida, // Para a parte numérica da vida também ter a cor
-                  this.getVidaAtual(),
-                  this.getVidaMaxima(),
-                  ConsoleColors.RESET); 
-                  // Garante que tudo reseta no final da linha
+                this.getNome(),
+                corVida + barraConstruida.toString() + ConsoleColors.RESET, // Barra colorida
+                corVida, // Para a parte numérica da vida também ter a cor
+                this.getVidaAtual(),
+                this.getVidaMaxima(),
+                ConsoleColors.RESET);
+        // Garante que tudo reseta no final da linha
         // System.out.println(" | Atk: " + this.ataque + " | Def: " + this.defesa +
         // " | Crítico: " + this.chanceCritico + "% | Esquiva: " + this.chanceEsquiva +
         // "%");

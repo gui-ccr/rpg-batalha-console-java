@@ -3,7 +3,6 @@ package com.guiccr.rpg;
 import java.util.InputMismatchException; // Para tratar entrada de Scanner
 import java.util.Scanner; // Para entrada do usuário
 
-
 public class Batalha {
 
     private Heroi heroi;
@@ -25,7 +24,7 @@ public class Batalha {
         this.turnos = 0; // Inicia com 0, incrementa no início do loop para ser Turno #1
         this.heroi = heroi;
         this.monstro = monstro;
-        this.scanner = scanner; 
+        this.scanner = scanner;
     }
 
     // Método principal para iniciar e gerenciar o fluxo da batalha
@@ -33,8 +32,9 @@ public class Batalha {
         System.out.println("\n=========================================");
         System.out.println("          A BATALHA COMEÇA!");
         System.out.println("=========================================");
-        System.out.println( ConsoleColors.CYAN_BRIGHT + heroi.getNome() +  ConsoleColors.RESET + " vs " + ConsoleColors.BLACK + monstro.getNome() + " (" + monstro.getTipo() + ")" + ConsoleColors.RESET + "!" );
-        MenuPrincipal.pausar(2000); 
+        System.out.println(ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + " vs "
+                + ConsoleColors.BLACK + monstro.getNome() + " (" + monstro.getTipo() + ")" + ConsoleColors.RESET + "!");
+        MenuPrincipal.pausar(2000);
 
         // Loop principal da batalha: continua enquanto ambos estiverem vivos
         while (heroi.estaVivo() && monstro.estaVivo()) {
@@ -44,10 +44,11 @@ public class Batalha {
             System.out.println("----------------------------------------");
             heroi.exibirStatus(); // Exibe status do Herói
             monstro.exibirStatus(); // Exibe status do Monstro
-            MenuPrincipal.pausar(2200); 
+            MenuPrincipal.pausar(2200);
 
             // --- Turno do Herói ---
-            System.out.println("\n--- VEZ DE " + ConsoleColors.CYAN_BRIGHT + heroi.getNome().toUpperCase() + ConsoleColors.RESET +" ---");
+            System.out.println("\n--- VEZ DE " + ConsoleColors.CYAN_BRIGHT + heroi.getNome().toUpperCase()
+                    + ConsoleColors.RESET + " ---");
             exibirMenuHeroi();
             int escolha = 0;
             boolean entradaValida = false;
@@ -78,26 +79,33 @@ public class Batalha {
                     if (heroi.getEnergia() >= 10) {
                         heroi.usarHabilidadeEspecial(monstro);
                     } else {
-                        System.out.println( ConsoleColors.CYAN_BRIGHT  + heroi.getNome() + ConsoleColors.RESET + " não tem energia suficiente.");
+                        System.out.println(ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET
+                                + " não tem energia suficiente.");
                     }
                     break;
             }
-            MenuPrincipal.pausar(3000); 
+            MenuPrincipal.pausar(3000);
 
             // Verificar se o monstro foi derrotado após o ataque do herói
             if (!monstro.estaVivo()) {
-                System.out.println("\n"+ ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET + " foi derrotado!");
-                break; // Sai do loop principal da batalha
+                System.out.println(
+                        "\n" + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET + " foi derrotado!");
+                heroi.ganharExperiencia(monstro.getExpConcedida()); // Chama o método do Herói
+
+                MenuPrincipal.pausar(2500); // Pausa para o jogador ler o ganho de EXP
+                break; // Sai do loop principal da batalh
             }
 
             // --- Turno do Monstro (se o monstro ainda estiver vivo) ---
-            System.out.println("\n--- VEZ DE "+ ConsoleColors.BLACK + monstro.getNome().toUpperCase() + ConsoleColors.RESET +" ---");
+            System.out.println("\n--- VEZ DE " + ConsoleColors.BLACK + monstro.getNome().toUpperCase()
+                    + ConsoleColors.RESET + " ---");
             monstro.atacar(heroi); // Monstro ataca automaticamente o herói
-            MenuPrincipal.pausar(3000); 
+            MenuPrincipal.pausar(3000);
 
             // Verificar se o herói foi derrotado após o ataque do monstro
             if (!heroi.estaVivo()) {
-                System.out.println("\n"+ ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + " foi derrotado!");
+                System.out.println(
+                        "\n" + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + " foi derrotado!");
                 break; // Sai do loop principal da batalha
             }
         } // Fim do loop while
@@ -107,9 +115,11 @@ public class Batalha {
         System.out.println("          FIM DA BATALHA!");
         System.out.println("=========================================");
         if (heroi.estaVivo()) {
-            System.out.println("🎉 VITÓRIA! " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET +" derrotou "+ ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET + "!");
+            System.out.println("🎉 VITÓRIA! " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET
+                    + " derrotou " + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET + "!");
         } else if (monstro.estaVivo()) {
-            System.out.println("💀 DERROTA! " + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET + " derrotou " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + ".");
+            System.out.println("💀 DERROTA! " + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET
+                    + " derrotou " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + ".");
         } else {
             System.out.println("🤝 EMPATE! Ambos os combatentes caíram."); // Caso ambos sejam derrotados no mesmo turno
         }
@@ -117,7 +127,8 @@ public class Batalha {
         System.out.println("\n--- RELATÓRIO DE BATALHA ---");
         System.out.printf("  Total de Turnos: %d%n", this.turnos);
         System.out.printf("  %s - Vida Final: (%d/%d)%n", heroi.getNome(), heroi.getVidaAtual(), heroi.getVidaMaxima());
-        System.out.printf("  %s - Vida Final: (%d/%d)%n", monstro.getNome(), monstro.getVidaAtual(), monstro.getVidaMaxima());
+        System.out.printf("  %s - Vida Final: (%d/%d)%n", monstro.getNome(), monstro.getVidaAtual(),
+                monstro.getVidaMaxima());
         System.out.println("----------------------------------------");
 
     }
@@ -125,7 +136,8 @@ public class Batalha {
     // Método auxiliar para exibir as opções de ação do Herói
     private void exibirMenuHeroi() {
         System.out.println("----------------------------------------");
-        System.out.println("Ações disponíveis para " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + ":");
+        System.out.println(
+                "Ações disponíveis para " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + ":");
         System.out.println("1. Atacar");
         System.out.println("2. Usar Habilidade Especial (Custo: 10 Energia)");
         System.out.println("----------------------------------------");
