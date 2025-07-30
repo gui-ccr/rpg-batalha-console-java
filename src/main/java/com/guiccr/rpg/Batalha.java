@@ -2,7 +2,7 @@ package com.guiccr.rpg;
 
 import java.util.InputMismatchException; // Para tratar entrada de Scanner
 import java.util.Scanner; // Para entrada do usuário
-import com.guiccr.rpg.MenuPrincipal; 
+
 
 public class Batalha {
 
