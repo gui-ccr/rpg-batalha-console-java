@@ -37,7 +37,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <mainClass>com.guiccr.rpg.TesteConexao</mainClass>
+                    <mainClass>com.guiccr.rpg.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
