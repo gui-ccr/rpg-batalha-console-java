@@ -2,6 +2,7 @@ package com.guiccr.rpg;
 
 import java.util.InputMismatchException; // Para tratar entrada de Scanner
 import java.util.Scanner; // Para entrada do usuário
+import java.util.List; // Para trabalhar com listas
 
 public class Batalha {
 
@@ -11,7 +12,7 @@ public class Batalha {
     private int turnos;
 
     // Construtor da batalha: recebe o herói, o monstro E o Scanner da Main
-    public Batalha(Heroi heroi, Monstro monstro, Scanner scanner) { 
+    public Batalha(Heroi heroi, Monstro monstro, Scanner scanner) {
         // Validações básicas para garantir que os combatentes não sejam nulos.
         if (heroi == null || monstro == null) {
             throw new IllegalArgumentException("Herói e Monstro não podem ser nulos para iniciar a batalha.");
@@ -29,9 +30,7 @@ public class Batalha {
 
     // Método principal para iniciar e gerenciar o fluxo da batalha
     public void iniciar() {
-        System.out.println("\n=========================================");
-        System.out.println("          A BATALHA COMEÇA!");
-        System.out.println("=========================================");
+        System.out.println("\n=== INÍCIO DA BATALHA ===");
         System.out.println(ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + " vs "
                 + ConsoleColors.BLACK + monstro.getNome() + " (" + monstro.getTipo() + ")" + ConsoleColors.RESET + "!");
         MenuPrincipal.pausar(2000);
@@ -42,47 +41,151 @@ public class Batalha {
 
             System.out.println("\n--- TURNO #" + this.turnos + " ---");
             System.out.println("----------------------------------------");
-            heroi.exibirStatus(); // Exibe status do Herói
-            monstro.exibirStatus(); // Exibe status do Monstro
-            MenuPrincipal.pausar(2200);
+            // Exibe apenas a vida dos combatentes durante os turnos
+            exibirVidaCombatentes();
+            MenuPrincipal.pausar(1500);
 
             // --- Turno do Herói ---
-            System.out.println("\n--- VEZ DE " + ConsoleColors.CYAN_BRIGHT + heroi.getNome().toUpperCase()
-                    + ConsoleColors.RESET + " ---");
-            exibirMenuHeroi();
-            int escolha = 0;
-            boolean entradaValida = false;
+            boolean acaoRealizada = false;
+            while (!acaoRealizada && heroi.estaVivo() && monstro.estaVivo()) {
+                System.out.println("\n--- VEZ DE " + ConsoleColors.CYAN_BRIGHT + heroi.getNome().toUpperCase()
+                        + ConsoleColors.RESET + " ---");
+                exibirMenuHeroi();
+                int escolha = 0;
+                boolean entradaValida = false;
 
-            // Loop para garantir uma entrada válida do usuário (Tratamento de Exceções)
-            while (!entradaValida) {
-                try {
-                    System.out.print("Escolha sua ação: ");
-                    escolha = scanner.nextInt(); // Tenta ler um número
-                    if (escolha >= 1 && escolha <= 2) {
-                        entradaValida = true;
-                    } else {
-                        System.out.println("Opção inválida. Por favor, digite 1 (Atacar) ou 2 (Habilidade Especial).");
+                // Loop para garantir uma entrada válida do usuário (Tratamento de Exceções)
+                while (!entradaValida) {
+                    try {
+                        System.out.print("Escolha sua ação: ");
+                        escolha = scanner.nextInt(); // Tenta ler um número
+                        if (escolha >= 1 && escolha <= 5) {
+                            entradaValida = true;
+                        } else {
+                            System.out.println(
+                                    "Opção inválida. Por favor, digite 1 (Atacar), 2 (Habilidade Especial), 3 (Inventário), 4 (Fugir) ou 5 (Status).");
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Entrada inválida. Por favor, digite um número (1-5).");
+                        scanner.next(); // Limpa o buffer do scanner para evitar loop infinito
                     }
-                } catch (InputMismatchException e) {
-                    System.out.println("Entrada inválida. Por favor, digite um número (1 ou 2).");
-                    scanner.next(); // Limpa o buffer do scanner para evitar loop infinito
                 }
-            }
-            scanner.nextLine(); // Consome a quebra de linha pendente após nextInt()
+                scanner.nextLine(); // Consome a quebra de linha pendente após nextInt()
 
-            // Processar a escolha do Herói
-            switch (escolha) {
-                case 1:
-                    heroi.atacar(monstro);
-                    break;
-                case 2:
-                    if (heroi.getEnergia() >= 10) {
-                        heroi.usarHabilidadeEspecial(monstro);
-                    } else {
+                // Processar a escolha do Herói
+                switch (escolha) {
+                    case 1:
+                        System.out.println("\n" + ConsoleColors.RED + "=== ATAQUE ===" + ConsoleColors.RESET);
+                        MenuPrincipal.pausar(500);
+                        System.out.println(heroi.getNome() + " prepara-se para atacar...");
+                        MenuPrincipal.pausar(800);
+                        heroi.atacar(monstro);
+                        MenuPrincipal.pausar(1500);
+                        acaoRealizada = true; // Ação que consome turno
+                        break;
+                    case 2:
+                        if (heroi.getEnergia() >= 10) {
+                            System.out.println("\n" + ConsoleColors.YELLOW + "=== HABILIDADE ESPECIAL ===" + ConsoleColors.RESET);
+                            MenuPrincipal.pausar(500);
+                            System.out.println(heroi.getNome() + " concentra energia para uma habilidade especial...");
+                            MenuPrincipal.pausar(1000);
+                            heroi.usarHabilidadeEspecial(monstro);
+                            MenuPrincipal.pausar(1500);
+                            acaoRealizada = true; // Ação que consome turno
+                        } else {
+                            System.out.println("\n" + ConsoleColors.RED + "=== ENERGIA INSUFICIENTE ===" + ConsoleColors.RESET);
+                            MenuPrincipal.pausar(500);
+                            System.out.println(ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET
+                                    + " não tem energia suficiente para usar habilidade especial.");
+                            System.out.println("Energia necessária: 10 | Energia atual: " + heroi.getEnergia());
+                            MenuPrincipal.pausar(2000);
+                        }
+                        break;
+                    case 3:
+                        // Submenu do Inventário
+                        boolean voltarAoMenuPrincipal = false;
+                        while (!voltarAoMenuPrincipal && !acaoRealizada) {
+                            System.out.println("\n" + ConsoleColors.CYAN + "=== INVENTÁRIO ===" + ConsoleColors.RESET);
+                            MenuPrincipal.pausar(500);
+                            System.out.println("Abrindo inventário...");
+                            MenuPrincipal.pausar(800);
+                            
+                            boolean inventarioValido = exibirMenuInventario();
+                            MenuPrincipal.pausar(1000);
+                            
+                            if (!inventarioValido) {
+                                System.out.println(ConsoleColors.RED + "Inventário vazio! Retornando ao menu principal..." + ConsoleColors.RESET);
+                                MenuPrincipal.pausar(1500);
+                                break;
+                            }
+                            
+                            int opcaoInventario = 0;
+                            boolean entradaInventarioValida = false;
+                            
+                            while (!entradaInventarioValida) {
+                                try {
+                                    System.out.print("Escolha uma opção do inventário: ");
+                                    opcaoInventario = scanner.nextInt();
+                                    if (opcaoInventario >= 1 && opcaoInventario <= 4) {
+                                        entradaInventarioValida = true;
+                                    } else {
+                                        System.out.println(ConsoleColors.RED + "Opção inválida. Digite 1, 2, 3 ou 4." + ConsoleColors.RESET);
+                                    }
+                                } catch (InputMismatchException e) {
+                                    System.out.println(ConsoleColors.RED + "Entrada inválida. Digite um número (1-4)." + ConsoleColors.RESET);
+                                    scanner.next();
+                                }
+                            }
+                            scanner.nextLine();
+                            
+                            switch (opcaoInventario) {
+                                case 1: // Usar Item
+                                    if (usarItemInventario()) {
+                                        acaoRealizada = true; // Consome turno
+                                        voltarAoMenuPrincipal = true;
+                                    }
+                                    break;
+                                case 2: // Equipar Item
+                                    equiparItemInventario(); // Não consome turno
+                                    break;
+                                case 3: // Ver Inventário Detalhado
+                                    verInventarioDetalhado(); // Não consome turno
+                                    break;
+                                case 4: // Voltar
+                                    System.out.println(ConsoleColors.YELLOW + "Retornando ao menu de batalha..." + ConsoleColors.RESET);
+                                    MenuPrincipal.pausar(800);
+                                    voltarAoMenuPrincipal = true;
+                                    break;
+                            }
+                        }
+                        break;
+                    case 4:
+                        System.out.println("\n" + ConsoleColors.YELLOW + "=== TENTATIVA DE FUGA ===" + ConsoleColors.RESET);
+                        MenuPrincipal.pausar(500);
+                        System.out.println(heroi.getNome() + " procura uma saída...");
+                        MenuPrincipal.pausar(1000);
+                        System.out.println("Tentando escapar...");
+                        MenuPrincipal.pausar(1500);
+                        System.out.println(ConsoleColors.RED + "A fuga falhou!" + ConsoleColors.RESET);
+                        MenuPrincipal.pausar(500);
                         System.out.println(ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET
-                                + " não tem energia suficiente.");
-                    }
-                    break;
+                                + " tentou fugir da batalha, mas não conseguiu!");
+                        MenuPrincipal.pausar(1500);
+                        acaoRealizada = true; // Ação que consome turno
+                        break;
+                    case 5:
+                        // Exibe o status do herói 
+                        System.out.println("\n" + ConsoleColors.PURPLE + "=== VERIFICANDO STATUS ===" + ConsoleColors.RESET);
+                        MenuPrincipal.pausar(500);
+                        System.out.println("Analisando condição atual do herói...");
+                        MenuPrincipal.pausar(800);
+                        heroi.exibirStatus();
+                        MenuPrincipal.pausar(1000);
+                        // NÃO marca acaoRealizada = true (não consome turno)
+                        System.out.println(ConsoleColors.GREEN + "(Exibir status não consome seu turno. Escolha uma ação de combate.)" + ConsoleColors.RESET);
+                        MenuPrincipal.pausar(1500);
+                        break;
+                }
             }
             MenuPrincipal.pausar(3000);
 
@@ -93,7 +196,7 @@ public class Batalha {
                 heroi.ganharExperiencia(monstro.getExpConcedida()); // Chama o método do Herói
 
                 MenuPrincipal.pausar(2500); // Pausa para o jogador ler o ganho de EXP
-                break; // Sai do loop principal da batalh
+                break; // Sai do loop principal da batalha
             }
 
             // --- Turno do Monstro (se o monstro ainda estiver vivo) ---
@@ -112,7 +215,7 @@ public class Batalha {
 
         // --- Resultado Final da Batalha ---
         System.out.println("\n=========================================");
-        System.out.println("          FIM DA BATALHA!");
+        System.out.println("FIM DA BATALHA!");
         System.out.println("=========================================");
         if (heroi.estaVivo()) {
             System.out.println("🎉 VITÓRIA! " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET
@@ -134,6 +237,217 @@ public class Batalha {
 
     }
 
+    /**
+     * Exibe apenas a vida dos combatentes com barras visuais
+     */
+    private void exibirVidaCombatentes() {
+        final int COMPRIMENTO_BARRA_HP = 20;
+        
+        // === BARRA DE VIDA DO HERÓI ===
+        double porcentagemVidaHeroi = (double) heroi.getVidaAtual() / heroi.getVidaMaxima();
+        int partesPreenchidas = (int) (porcentagemVidaHeroi * COMPRIMENTO_BARRA_HP);
+        int partesVazias = COMPRIMENTO_BARRA_HP - partesPreenchidas;
+        
+        StringBuilder barraHeroi = new StringBuilder();
+        barraHeroi.append("[");
+        for (int i = 0; i < partesPreenchidas; i++) barraHeroi.append("█");
+        for (int i = 0; i < partesVazias; i++) barraHeroi.append("-");
+        barraHeroi.append("]");
+        
+        String corVidaHeroi = (porcentagemVidaHeroi > 0.5) ? ConsoleColors.GREEN : 
+                              (porcentagemVidaHeroi > 0.2) ? ConsoleColors.YELLOW : ConsoleColors.RED;
+        
+        System.out.printf("%-15s HP: %s%s (%d/%d)%s%n",
+                          ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET,
+                          corVidaHeroi + barraHeroi.toString() + ConsoleColors.RESET,
+                          corVidaHeroi, heroi.getVidaAtual(), heroi.getVidaMaxima(), ConsoleColors.RESET);
+        
+        // === BARRA DE VIDA DO MONSTRO ===
+        double porcentagemVidaMonstro = (double) monstro.getVidaAtual() / monstro.getVidaMaxima();
+        partesPreenchidas = (int) (porcentagemVidaMonstro * COMPRIMENTO_BARRA_HP);
+        partesVazias = COMPRIMENTO_BARRA_HP - partesPreenchidas;
+        
+        StringBuilder barraMonstro = new StringBuilder();
+        barraMonstro.append("[");
+        for (int i = 0; i < partesPreenchidas; i++) barraMonstro.append("█");
+        for (int i = 0; i < partesVazias; i++) barraMonstro.append("-");
+        barraMonstro.append("]");
+        
+        String corVidaMonstro = (porcentagemVidaMonstro > 0.5) ? ConsoleColors.GREEN : 
+                                (porcentagemVidaMonstro > 0.2) ? ConsoleColors.YELLOW : ConsoleColors.RED;
+        
+        System.out.printf("%-15s HP: %s%s (%d/%d)%s%n",
+                          ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET,
+                          corVidaMonstro + barraMonstro.toString() + ConsoleColors.RESET,
+                          corVidaMonstro, monstro.getVidaAtual(), monstro.getVidaMaxima(), ConsoleColors.RESET);
+    }
+
+    // === MÉTODOS AUXILIARES DO INVENTÁRIO ===
+    
+    /**
+     * Exibe o menu do inventário e retorna se há itens disponíveis
+     */
+    private boolean exibirMenuInventario() {
+        System.out.println("----------------------------------------");
+        System.out.println("           INVENTÁRIO DE " + ConsoleColors.CYAN_BRIGHT + heroi.getNome().toUpperCase() + ConsoleColors.RESET);
+        System.out.println("----------------------------------------");
+        System.out.println("1. Usar Item (consome turno)");
+        System.out.println("2. Equipar Equipamento (não consome turno)");
+        System.out.println("3. Ver Inventário Detalhado (não consome turno)");
+        System.out.println("4. Voltar ao Menu de Batalha");
+        System.out.println("----------------------------------------");
+        
+        // Verifica se há itens no inventário (sem exibi-los aqui)
+        List<Item> itens = heroi.getInventario().listarItens();
+        boolean temItens = itens.size() > 0;
+        
+        if (temItens) {
+            System.out.println(ConsoleColors.GREEN + "Itens disponíveis: " + itens.size() + ConsoleColors.RESET);
+        } else {
+            System.out.println(ConsoleColors.RED + "Inventário vazio!" + ConsoleColors.RESET);
+        }
+        
+        return temItens;
+    }
+    
+    /**
+     * Gerencia o uso de itens do inventário
+     */
+    private boolean usarItemInventario() {
+        System.out.println("\n" + ConsoleColors.GREEN + "=== USAR ITEM ===" + ConsoleColors.RESET);
+        MenuPrincipal.pausar(500);
+        System.out.println("Procurando itens utilizáveis no inventário...");
+        MenuPrincipal.pausar(800);
+        
+        List<Item> itens = heroi.getInventario().listarItens();
+        if (itens.isEmpty()) {
+            System.out.println(ConsoleColors.RED + "Não há itens para usar!" + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1500);
+            return false;
+        }
+        
+        // Exibe apenas a lista de itens sem duplicação
+        System.out.println("Itens disponíveis:");
+        for (int i = 0; i < itens.size(); i++) {
+            Item item = itens.get(i);
+            System.out.println((i + 1) + ". " + item.getNome() + " - " + item.getDescricao());
+        }
+        
+        MenuPrincipal.pausar(1000);
+        System.out.print("Digite o número do item que deseja usar (0 para cancelar): ");
+        int numItem = scanner.nextInt();
+        scanner.nextLine();
+        
+        if (numItem == 0) {
+            System.out.println(ConsoleColors.YELLOW + "Uso de item cancelado." + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1000);
+            return false;
+        }
+        
+        int indiceItem = numItem - 1;
+        if (indiceItem < 0 || indiceItem >= itens.size()) {
+            System.out.println(ConsoleColors.RED + "Número inválido!" + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1500);
+            return false;
+        }
+        
+        System.out.println("\nUsando item...");
+        MenuPrincipal.pausar(800);
+        heroi.getInventario().aplicarEfeitoItem(indiceItem, heroi);
+        MenuPrincipal.pausar(1500);
+        return true; // Item usado com sucesso
+    }
+    
+    /**
+     * Gerencia equipar itens do inventário
+     */
+    private void equiparItemInventario() {
+        System.out.println("\n" + ConsoleColors.YELLOW + "=== EQUIPAR EQUIPAMENTO ===" + ConsoleColors.RESET);
+        MenuPrincipal.pausar(500);
+        System.out.println("Verificando equipamentos disponíveis...");
+        MenuPrincipal.pausar(800);
+        
+        List<Item> itens = heroi.getInventario().listarItens();
+        if (itens.isEmpty()) {
+            System.out.println(ConsoleColors.RED + "Não há equipamentos para equipar!" + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1500);
+            return;
+        }
+        
+        // Exibe apenas a lista de itens sem duplicação
+        System.out.println("Equipamentos disponíveis:");
+        for (int i = 0; i < itens.size(); i++) {
+            Item item = itens.get(i);
+            System.out.println((i + 1) + ". " + item.getNome() + " - " + item.getDescricao());
+        }
+        
+        MenuPrincipal.pausar(1000);
+        System.out.print("Digite o número do equipamento que deseja equipar (0 para cancelar): ");
+        int numEquipar = scanner.nextInt();
+        scanner.nextLine();
+        
+        if (numEquipar == 0) {
+            System.out.println(ConsoleColors.YELLOW + "Equipar cancelado." + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1000);
+            return;
+        }
+        
+        int indiceEquipar = numEquipar - 1;
+        if (indiceEquipar < 0 || indiceEquipar >= itens.size()) {
+            System.out.println(ConsoleColors.RED + "Número inválido!" + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1500);
+            return;
+        }
+        
+        System.out.println("\nEquipando item...");
+        MenuPrincipal.pausar(800);
+        heroi.getInventario().equiparItem(indiceEquipar, heroi);
+        MenuPrincipal.pausar(1000);
+        System.out.println(ConsoleColors.GREEN + "Equipamento alterado com sucesso!" + ConsoleColors.RESET);
+        MenuPrincipal.pausar(1500);
+    }
+    
+    /**
+     * Exibe o inventário detalhado com efeito visual gradual
+     */
+    private void verInventarioDetalhado() {
+        System.out.println("\n" + ConsoleColors.PURPLE + "=== INVENTÁRIO DETALHADO ===" + ConsoleColors.RESET);
+        MenuPrincipal.pausar(500);
+        System.out.println("Analisando seus itens...");
+        MenuPrincipal.pausar(800);
+        System.out.println("Verificando condição dos equipamentos...");
+        MenuPrincipal.pausar(600);
+        System.out.println("Organizando inventário...");
+        MenuPrincipal.pausar(700);
+        
+        List<Item> itens = heroi.getInventario().listarItens();
+        if (itens.isEmpty()) {
+            System.out.println(ConsoleColors.RED + "Seu inventário está vazio." + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1000);
+            System.out.println("Procure por itens durante suas aventuras!");
+        } else {
+            System.out.println(ConsoleColors.GREEN + "Inventário catalogado com sucesso!" + ConsoleColors.RESET);
+            MenuPrincipal.pausar(500);
+            System.out.println("\n" + ConsoleColors.CYAN + "--- RELATÓRIO DETALHADO ---" + ConsoleColors.RESET);
+            MenuPrincipal.pausar(500);
+            
+            // Exibe cada item individualmente com pausa
+            for (int i = 0; i < itens.size(); i++) {
+                Item item = itens.get(i);
+                System.out.println((i + 1) + ". " + ConsoleColors.YELLOW + item.getNome() + ConsoleColors.RESET + 
+                                 " - " + item.getDescricao());
+                MenuPrincipal.pausar(400); // Pausa entre cada item
+            }
+            
+            MenuPrincipal.pausar(500);
+            System.out.println("\n" + ConsoleColors.CYAN + "Total de itens catalogados: " + itens.size() + ConsoleColors.RESET);
+        }
+        
+        MenuPrincipal.pausar(1500);
+        System.out.println(ConsoleColors.GREEN + "Pressione Enter para continuar..." + ConsoleColors.RESET);
+        scanner.nextLine();
+    }
+
     // Método auxiliar para exibir as opções de ação do Herói
     private void exibirMenuHeroi() {
         System.out.println("----------------------------------------");
@@ -141,6 +455,9 @@ public class Batalha {
                 "Ações disponíveis para " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + ":");
         System.out.println("1. Atacar");
         System.out.println("2. Usar Habilidade Especial (Custo: 10 Energia)");
+        System.out.println("3. Inventário (usar itens, equipar equipamentos)");
+        System.out.println("4. Fugir da Batalha (Não garantido)");
+        System.out.println("5. Exibir Status do Herói (não consome turno)");
         System.out.println("----------------------------------------");
     }
 }

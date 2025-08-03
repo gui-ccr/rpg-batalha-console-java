@@ -18,3 +18,13 @@ CREATE TABLE herois (
     experiencia_atual INTEGER NOT NULL,
     experiencia_para_proximo_nivel INTEGER NOT NULL
 );
+
+CREATE TABLE inventario_itens (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    heroi_id INTEGER,
+    nome TEXT NOT NULL,
+    descricao TEXT NOT NULL,
+    tipo_item TEXT NOT NULL, -- Ex: Pocao, Espada
+    valor_numerico INTEGER NOT NULL, -- Ex: cura da poção, dano da espada
+    FOREIGN KEY (heroi_id) REFERENCES herois(id) ON DELETE CASCADE
+);

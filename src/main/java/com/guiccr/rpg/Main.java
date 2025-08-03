@@ -19,9 +19,15 @@ public class Main {
                 case 1: // NOVO JOGO
                     System.out.println("\nIniciando nova batalha...");
                     MenuPrincipal.pausar(1000); // Pausa de 1 segundo
+                    PocaoVida pocaoVida = new PocaoVida("Poção de Vida", "Restaura 35 pontos de vida.", 35);
+                    Espada espada = new Espada("Espada Longa", "Uma espada longa de conhecimento.", 19, "Alta");
+                    Inventario inventario = new Inventario(); // Cria um novo inventário
+                    inventario.adicionarItem(pocaoVida); // Adiciona a poção de vida ao inventário
+                    inventario.adicionarItem(espada); // Adiciona a espada ao inventário
+                    // Cria um novo herói com o inventário
 
                     // Crie instâncias de Heroi e Monstro AQUI (usando GeradorDeNomes)
-                    Heroi heroi_principal = new Heroi(nomeAleatorioHeroi, 12, 3, 6, 3, 4, 20);
+                    Heroi heroi_principal = new Heroi(nomeAleatorioHeroi, 12, 3, 6, 3, 4, 20, inventario );
                     Monstro monstro_g0 = new Monstro(nomeAleatorioMonstro, 110, 20, 10, 10, 1.4, 15, "Criatura");
                     RepositorioDeHerois.salvarHeroi(heroi_principal);
 
