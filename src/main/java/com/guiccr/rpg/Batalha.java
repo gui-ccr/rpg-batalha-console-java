@@ -41,7 +41,7 @@ public class Batalha {
     public void iniciar() {
         System.out.println("\n=== INÍCIO DA BATALHA ===");
         System.out.println(ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + " vs "
-                + ConsoleColors.BLACK + monstro.getNome() + " (" + monstro.getTipo() + ")" + ConsoleColors.RESET + "!");
+                + ConsoleColors.RED + monstro.getNome() + " (" + monstro.getTipo() + ")" + ConsoleColors.RESET + "!");
         MenuPrincipal.pausar(2000);
         // =================================================================
         // FIM COMMIT 2: INICIALIZAÇÃO DA BATALHA
@@ -256,7 +256,7 @@ public class Batalha {
             // Verificar se o monstro foi derrotado após o ataque do herói
             if (!monstro.estaVivo()) {
                 System.out.println(
-                        "\n" + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET + " foi derrotado!");
+                        "\n" + ConsoleColors.RED + monstro.getNome() + ConsoleColors.RESET + " foi derrotado!");
                 heroi.ganharExperiencia(monstro.getExpConcedida()); // Chama o método do Herói
 
                 MenuPrincipal.pausar(2500); // Pausa para o jogador ler o ganho de EXP
@@ -270,7 +270,7 @@ public class Batalha {
             // COMMIT 11: TURNO DO MONSTRO
             // =================================================================
             // --- Turno do Monstro (se o monstro ainda estiver vivo) ---
-            System.out.println("\n--- VEZ DE " + ConsoleColors.BLACK + monstro.getNome().toUpperCase()
+            System.out.println("\n--- VEZ DE " + ConsoleColors.RED + monstro.getNome().toUpperCase()
                     + ConsoleColors.RESET + " ---");
             monstro.atacar(heroi); // Monstro ataca automaticamente o herói
             MenuPrincipal.pausar(3000);
@@ -295,10 +295,10 @@ public class Batalha {
         System.out.println("=========================================");
         if (heroi.estaVivo()) {
             System.out.println("🎉 VITÓRIA! " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET
-                    + " derrotou " + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET + "!");
+                    + " derrotou " + ConsoleColors.RED + monstro.getNome() + ConsoleColors.RESET + "!");
             RepositorioDeHerois.atualizarHeroi(heroi);
         } else if (monstro.estaVivo()) {
-            System.out.println("💀 DERROTA! " + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET
+            System.out.println("💀 DERROTA! " + ConsoleColors.RED + monstro.getNome() + ConsoleColors.RESET
                     + " derrotou " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + ".");
         } else {
             System.out.println("🤝 EMPATE! Ambos os combatentes caíram."); // Caso ambos sejam derrotados no mesmo turno
@@ -359,7 +359,7 @@ public class Batalha {
                                 (porcentagemVidaMonstro > 0.2) ? ConsoleColors.YELLOW : ConsoleColors.RED;
         
         System.out.printf("%-15s HP: %s%s (%d/%d)%s%n",
-                          ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET,
+                          ConsoleColors.RED + monstro.getNome() + ConsoleColors.RESET,
                           corVidaMonstro + barraMonstro.toString() + ConsoleColors.RESET,
                           corVidaMonstro, monstro.getVidaAtual(), monstro.getVidaMaxima(), ConsoleColors.RESET);
     }
