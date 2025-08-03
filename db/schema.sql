@@ -1,6 +1,7 @@
 CREATE TABLE herois (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
+    nome TEXT NOT NULL UNIQUE,
+    vida_atual INTEGER NOT NULL,
     vida_maxima INTEGER NOT NULL,
     ataque INTEGER NOT NULL,
     defesa INTEGER NOT NULL,

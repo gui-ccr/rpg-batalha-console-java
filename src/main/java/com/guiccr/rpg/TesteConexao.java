@@ -13,7 +13,7 @@ public class TesteConexao {
         // Bloco try-with-resources para garantir que a conexão, o comando e o resultado
         // sejam fechados automaticamente.
         try (Connection conexao = DriverManager.getConnection(URL_JDBC);
-                Statement comando = conexao.createStatement()) {
+        Statement comando = conexao.createStatement()) {
 
             System.out.println("Conexão com o banco de dados estabelecida com sucesso!");
 

@@ -1,47 +1,28 @@
 package com.guiccr.rpg;
 
 public class Monstro extends Personagem {
+    private String tipo;
+    private int experienciaConcedida;
 
-    private String tipo; 
-    private int experienciaConcedida; 
-
-    // Construtor do Monstro:
-    // Não recebe 'experienciaConcedida' como parâmetro, pois será gerada internamente.
     public Monstro(String nome, int vidaMaxima, int ataque, int defesa,
-                   int chanceCritico, double multiplicadorCritico, int chanceEsquiva,
-                   String tipo) { 
+                   int chanceCritico, double multiplicadorCritico, int chanceEsquiva, String tipo) {
+        // Chama o construtor da superclasse
         super(nome, vidaMaxima, ataque, defesa, chanceCritico, multiplicadorCritico, chanceEsquiva);
-
-        // Validação e atribuição do tipo
-        if (tipo == null || tipo.trim().isEmpty()) {
-            throw new IllegalArgumentException("Tipo do monstro não pode ser nulo ou vazio.");
-        }
+        if (tipo == null || tipo.trim().isEmpty()) throw new IllegalArgumentException("Tipo do monstro não pode ser nulo ou vazio.");
         this.tipo = tipo;
 
-        // NOVO: Geração da experiência concedida de forma aleatória no construtor
-        // Baseado na vida máxima e ataque do monstro para uma EXP mais justa
         int minExp = (this.getVidaMaxima() / 4) + (this.getAtaque() / 2);
         int maxExp = (this.getVidaMaxima() / 2) + this.getAtaque();
-
-        if (minExp <= 0) minExp = 1; // Garante que a EXP mínima seja pelo menos 1
-        if (maxExp < minExp) maxExp = minExp + 10; // Garante um intervalo mínimo se max for menor que min
-
+        if (minExp <= 0) minExp = 1;
+        if (maxExp < minExp) maxExp = minExp + 10;
         this.experienciaConcedida = (int) (Math.random() * (maxExp - minExp + 1)) + minExp;
     }
 
-    // --- Métodos Getters ---
-    public String getTipo() {
-        return tipo;
-    }
+    public String getTipo() { return tipo; }
+    public int getExpConcedida() { return experienciaConcedida; }
 
-    // NOVO: Getter para a experiência que o monstro concede ao ser derrotado
-    public int getExpConcedida() {
-        return experienciaConcedida;
-    }
-
-    // --- Implementação do Método Abstrato 'atacar()' herdado de Personagem ---
     @Override
-    public void atacar(Personagem alvo) {
+    public void atacar(Personagem alvo) { 
         System.out.println("\n" + ConsoleColors.RED_BRIGHT + this.getNome() + ConsoleColors.RESET + " ("
                            + this.getTipo() + ") ataca " + ConsoleColors.CYAN_BRIGHT + alvo.getNome() + ConsoleColors.RESET + "!");
 
