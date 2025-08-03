@@ -33,24 +33,90 @@ public class Main {
                     batalha.iniciar(); // Inicia o loop da batalha
                     break;
                 case 2: // CARREGAR JOGO
-                    System.out.println("Digite o nome do heroi para carrega: ");
-                    String nomeParaCarregar = scanner.nextLine();
-                    Optional<Heroi> heroiCarregado = RepositorioDeHerois.buscarHeroi(nomeParaCarregar);
-
-                    Monstro monstro_g1 = new Monstro(nomeAleatorioMonstro, 110, 20, 10, 10, 1.4, 15, "Criatura");
-
-                    if (heroiCarregado.isPresent()) {
-                        System.out.println("Herói " + ConsoleColors.CYAN_BRIGHT + heroiCarregado.get().getNome()
-                                + " carregado com sucesso!");
-                        heroiCarregado.get().exibirStatus();
-                        Batalha batalhaCarregada = new Batalha(heroiCarregado.get(), monstro_g1, scanner);
-                        batalhaCarregada.iniciar();
-                    } else {
-                        System.out.println("Herói não encontrado. Tente novamente.");
-
+                    System.out.println("\n=== CARREGAR JOGO ===");
+                    RepositorioDeHerois.listarHerois(); // Lista os heróis disponíveis com índices
+                    
+                    int totalHeroisCarregar = RepositorioDeHerois.contarHerois();
+                    if (totalHeroisCarregar == 0) {
+                        System.out.println("Não há heróis salvos para carregar.");
+                        break;
+                    }
+                    
+                    System.out.print("Digite o número do herói que deseja carregar (1-" + totalHeroisCarregar + ") ou 0 para cancelar: ");
+                    
+                    try {
+                        int indiceEscolhidoCarregar = scanner.nextInt();
+                        scanner.nextLine(); // Consome a quebra de linha
+                        
+                        if (indiceEscolhidoCarregar == 0) {
+                            System.out.println("Operação cancelada.");
+                        } else if (indiceEscolhidoCarregar >= 1 && indiceEscolhidoCarregar <= totalHeroisCarregar) {
+                            String nomeParaCarregar = RepositorioDeHerois.obterNomeHeroiPorIndice(indiceEscolhidoCarregar);
+                            if (nomeParaCarregar != null) {
+                                Optional<Heroi> heroiCarregado = RepositorioDeHerois.buscarHeroi(nomeParaCarregar);
+                                
+                                if (heroiCarregado.isPresent()) {
+                                    System.out.println("Herói " + ConsoleColors.CYAN_BRIGHT + heroiCarregado.get().getNome()
+                                            + ConsoleColors.RESET + " carregado com sucesso!");
+                                    heroiCarregado.get().exibirStatus();
+                                    
+                                    Monstro monstro_g1 = new Monstro(nomeAleatorioMonstro, 110, 20, 10, 10, 1.4, 15, "Criatura");
+                                    Batalha batalhaCarregada = new Batalha(heroiCarregado.get(), monstro_g1, scanner);
+                                    batalhaCarregada.iniciar();
+                                } else {
+                                    System.out.println("Erro: Herói não encontrado no banco de dados.");
+                                }
+                            } else {
+                                System.out.println("Erro: Herói não encontrado.");
+                            }
+                        } else {
+                            System.out.println("Número inválido. Digite um número entre 1 e " + totalHeroisCarregar + ".");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Entrada inválida. Por favor, digite apenas números.");
+                        scanner.nextLine(); // Limpa o buffer
                     }
                     break;
-                    case 3: // SAIR DO JOGO 
+                case 3: // EXCLUIR HERÓI
+                    System.out.println("\n=== EXCLUIR HERÓI ===");
+                    RepositorioDeHerois.listarHerois(); // Lista os heróis disponíveis com índices
+                    
+                    int totalHerois = RepositorioDeHerois.contarHerois();
+                    if (totalHerois == 0) {
+                        System.out.println("Não há heróis para excluir.");
+                        break;
+                    }
+                    
+                    System.out.print("Digite o número do herói que deseja excluir (1-" + totalHerois + ") ou 0 para cancelar: ");
+                    
+                    try {
+                        int indiceEscolhido = scanner.nextInt();
+                        scanner.nextLine(); // Consome a quebra de linha
+                        
+                        if (indiceEscolhido == 0) {
+                            System.out.println("Operação cancelada.");
+                        } else if (indiceEscolhido >= 1 && indiceEscolhido <= totalHerois) {
+                            String nomeParaExcluir = RepositorioDeHerois.obterNomeHeroiPorIndice(indiceEscolhido);
+                            if (nomeParaExcluir != null) {
+                                System.out.print("Tem certeza que deseja excluir o herói '#" + indiceEscolhido + " - " + nomeParaExcluir + "'? (s/n): ");
+                                String confirmacao = scanner.nextLine().trim().toLowerCase();
+                                if (confirmacao.equals("s") || confirmacao.equals("sim")) {
+                                    RepositorioDeHerois.deletarHeroi(nomeParaExcluir);
+                                } else {
+                                    System.out.println("Exclusão cancelada.");
+                                }
+                            } else {
+                                System.out.println("Erro: Herói não encontrado.");
+                            }
+                        } else {
+                            System.out.println("Número inválido. Digite um número entre 1 e " + totalHerois + ".");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Entrada inválida. Por favor, digite apenas números.");
+                        scanner.nextLine(); // Limpa o buffer
+                    }
+                    break;
+                case 4: // SAIR DO JOGO 
                     System.out.println("Saindo do jogo....");
                     break;
                 default:
@@ -60,7 +126,7 @@ public class Main {
                     break;
             }
             MenuPrincipal.pausar(2000); // Pausa após cada rodada do menu principal (antes de reexibir)
-        } while (escolhaMenu != 3); // Repete o menu até o usuário escolher Sair
+        } while (escolhaMenu != 4); // Repete o menu até o usuário escolher Sair
 
         scanner.close(); // Fecha o scanner ao sair do jogo (e somente aqui)
         System.out.println("--- Jogo Encerrado ---");
