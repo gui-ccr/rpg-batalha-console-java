@@ -73,4 +73,32 @@ public class Inventario {
             System.out.println("Este item não pode ser equipado: " + item.getNome());
         }
     }
+    
+    public boolean equiparItemDoInventario(int indice, Heroi heroi) {
+        // Valida índice
+        if (indice < 0 || indice >= itens.size()) {
+            System.out.println("Índice inválido.");
+            return false;
+        }
+        
+        Item item = this.itens.get(indice);
+        
+        // Verifica se é equipável
+        if (!(item instanceof Equipavel)) {
+            System.out.println("Este item não pode ser equipado.");
+            return false;
+        }
+        
+        Equipavel equipamento = (Equipavel) item;
+        
+        // Tenta equipar no herói
+        if (heroi.equiparItem(equipamento)) {
+            // Remove do inventário apenas se equipou com sucesso
+            this.itens.remove(indice);
+            return true;
+        }
+        
+        return false;
+    }
+
 }
