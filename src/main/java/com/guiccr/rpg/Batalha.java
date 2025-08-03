@@ -4,6 +4,9 @@ import java.util.InputMismatchException; // Para tratar entrada de Scanner
 import java.util.Scanner; // Para entrada do usuário
 import java.util.List; // Para trabalhar com listas
 
+// =================================================================
+// COMMIT 1: ESTRUTURA BASE DA CLASSE
+// =================================================================
 public class Batalha {
 
     private Heroi heroi;
@@ -27,14 +30,26 @@ public class Batalha {
         this.monstro = monstro;
         this.scanner = scanner;
     }
+// =================================================================
+// FIM COMMIT 1: ESTRUTURA BASE DA CLASSE
+// =================================================================
 
+    // =================================================================
+    // COMMIT 2: INICIALIZAÇÃO DA BATALHA
+    // =================================================================
     // Método principal para iniciar e gerenciar o fluxo da batalha
     public void iniciar() {
         System.out.println("\n=== INÍCIO DA BATALHA ===");
         System.out.println(ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + " vs "
                 + ConsoleColors.BLACK + monstro.getNome() + " (" + monstro.getTipo() + ")" + ConsoleColors.RESET + "!");
         MenuPrincipal.pausar(2000);
+        // =================================================================
+        // FIM COMMIT 2: INICIALIZAÇÃO DA BATALHA
+        // =================================================================
 
+        // =================================================================
+        // COMMIT 3: LOOP PRINCIPAL DE TURNOS
+        // =================================================================
         // Loop principal da batalha: continua enquanto ambos estiverem vivos
         while (heroi.estaVivo() && monstro.estaVivo()) {
             this.turnos++; // Incrementa o contador de turnos no início de CADA TURNO
@@ -44,7 +59,13 @@ public class Batalha {
             // Exibe apenas a vida dos combatentes durante os turnos
             exibirVidaCombatentes();
             MenuPrincipal.pausar(1500);
+            // =================================================================
+            // FIM COMMIT 3: LOOP PRINCIPAL DE TURNOS
+            // =================================================================
 
+            // =================================================================
+            // COMMIT 4: SISTEMA DE MENU DO HERÓI
+            // =================================================================
             // --- Turno do Herói ---
             boolean acaoRealizada = false;
             while (!acaoRealizada && heroi.estaVivo() && monstro.estaVivo()) {
@@ -71,9 +92,15 @@ public class Batalha {
                     }
                 }
                 scanner.nextLine(); // Consome a quebra de linha pendente após nextInt()
+                // =================================================================
+                // FIM COMMIT 4: SISTEMA DE MENU DO HERÓI
+                // =================================================================
 
                 // Processar a escolha do Herói
                 switch (escolha) {
+                    // =================================================================
+                    // COMMIT 5: AÇÃO 1 - SISTEMA DE ATAQUE
+                    // =================================================================
                     case 1:
                         System.out.println("\n" + ConsoleColors.RED + "=== ATAQUE ===" + ConsoleColors.RESET);
                         MenuPrincipal.pausar(500);
@@ -83,6 +110,13 @@ public class Batalha {
                         MenuPrincipal.pausar(1500);
                         acaoRealizada = true; // Ação que consome turno
                         break;
+                    // =================================================================
+                    // FIM COMMIT 5: AÇÃO 1 - SISTEMA DE ATAQUE
+                    // =================================================================
+                    
+                    // =================================================================
+                    // COMMIT 6: AÇÃO 2 - HABILIDADE ESPECIAL
+                    // =================================================================
                     case 2:
                         if (heroi.getEnergia() >= 10) {
                             System.out.println("\n" + ConsoleColors.YELLOW + "=== HABILIDADE ESPECIAL ===" + ConsoleColors.RESET);
@@ -101,6 +135,13 @@ public class Batalha {
                             MenuPrincipal.pausar(2000);
                         }
                         break;
+                    // =================================================================
+                    // FIM COMMIT 6: AÇÃO 2 - HABILIDADE ESPECIAL
+                    // =================================================================
+                    
+                    // =================================================================
+                    // COMMIT 7: AÇÃO 3 - SISTEMA DE INVENTÁRIO (MEGA COMMIT)
+                    // =================================================================
                     case 3:
                         // Submenu do Inventário
                         boolean voltarAoMenuPrincipal = false;
@@ -159,6 +200,13 @@ public class Batalha {
                             }
                         }
                         break;
+                    // =================================================================
+                    // FIM COMMIT 7: AÇÃO 3 - SISTEMA DE INVENTÁRIO (MEGA COMMIT)
+                    // =================================================================
+                    
+                    // =================================================================
+                    // COMMIT 8: AÇÃO 4 - SISTEMA DE FUGA
+                    // =================================================================
                     case 4:
                         System.out.println("\n" + ConsoleColors.YELLOW + "=== TENTATIVA DE FUGA ===" + ConsoleColors.RESET);
                         MenuPrincipal.pausar(500);
@@ -173,6 +221,13 @@ public class Batalha {
                         MenuPrincipal.pausar(1500);
                         acaoRealizada = true; // Ação que consome turno
                         break;
+                    // =================================================================
+                    // FIM COMMIT 8: AÇÃO 4 - SISTEMA DE FUGA
+                    // =================================================================
+                    
+                    // =================================================================
+                    // COMMIT 9: AÇÃO 5 - EXIBIR STATUS
+                    // =================================================================
                     case 5:
                         // Exibe o status do herói 
                         System.out.println("\n" + ConsoleColors.PURPLE + "=== VERIFICANDO STATUS ===" + ConsoleColors.RESET);
@@ -185,10 +240,16 @@ public class Batalha {
                         System.out.println(ConsoleColors.GREEN + "(Exibir status não consome seu turno. Escolha uma ação de combate.)" + ConsoleColors.RESET);
                         MenuPrincipal.pausar(1500);
                         break;
+                    // =================================================================
+                    // FIM COMMIT 9: AÇÃO 5 - EXIBIR STATUS
+                    // =================================================================
                 }
             }
             MenuPrincipal.pausar(3000);
 
+            // =================================================================
+            // COMMIT 10: VERIFICAÇÃO DE VITÓRIA
+            // =================================================================
             // Verificar se o monstro foi derrotado após o ataque do herói
             if (!monstro.estaVivo()) {
                 System.out.println(
@@ -198,7 +259,13 @@ public class Batalha {
                 MenuPrincipal.pausar(2500); // Pausa para o jogador ler o ganho de EXP
                 break; // Sai do loop principal da batalha
             }
+            // =================================================================
+            // FIM COMMIT 10: VERIFICAÇÃO DE VITÓRIA
+            // =================================================================
 
+            // =================================================================
+            // COMMIT 11: TURNO DO MONSTRO
+            // =================================================================
             // --- Turno do Monstro (se o monstro ainda estiver vivo) ---
             System.out.println("\n--- VEZ DE " + ConsoleColors.BLACK + monstro.getNome().toUpperCase()
                     + ConsoleColors.RESET + " ---");
@@ -211,8 +278,14 @@ public class Batalha {
                         "\n" + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + " foi derrotado!");
                 break; // Sai do loop principal da batalha
             }
+            // =================================================================
+            // FIM COMMIT 11: TURNO DO MONSTRO
+            // =================================================================
         } // Fim do loop while
 
+        // =================================================================
+        // COMMIT 12: RESULTADO FINAL DA BATALHA
+        // =================================================================
         // --- Resultado Final da Batalha ---
         System.out.println("\n=========================================");
         System.out.println("FIM DA BATALHA!");
@@ -234,9 +307,15 @@ public class Batalha {
         System.out.printf("  %s - Vida Final: (%d/%d)%n", monstro.getNome(), monstro.getVidaAtual(),
                 monstro.getVidaMaxima());
         System.out.println("----------------------------------------");
+        // =================================================================
+        // FIM COMMIT 12: RESULTADO FINAL DA BATALHA
+        // =================================================================
 
     }
 
+    // =================================================================
+    // COMMIT 13: SISTEMA DE BARRAS DE VIDA
+    // =================================================================
     /**
      * Exibe apenas a vida dos combatentes com barras visuais
      */
@@ -281,7 +360,13 @@ public class Batalha {
                           corVidaMonstro + barraMonstro.toString() + ConsoleColors.RESET,
                           corVidaMonstro, monstro.getVidaAtual(), monstro.getVidaMaxima(), ConsoleColors.RESET);
     }
+    // =================================================================
+    // FIM COMMIT 13: SISTEMA DE BARRAS DE VIDA
+    // =================================================================
 
+    // =================================================================
+    // COMMIT 14: MÉTODOS AUXILIARES DO INVENTÁRIO
+    // =================================================================
     // === MÉTODOS AUXILIARES DO INVENTÁRIO ===
     
     /**
@@ -447,7 +532,13 @@ public class Batalha {
         System.out.println(ConsoleColors.GREEN + "Pressione Enter para continuar..." + ConsoleColors.RESET);
         scanner.nextLine();
     }
+    // =================================================================
+    // FIM COMMIT 14: MÉTODOS AUXILIARES DO INVENTÁRIO
+    // =================================================================
 
+    // =================================================================
+    // COMMIT 15: MENU DO HERÓI
+    // =================================================================
     // Método auxiliar para exibir as opções de ação do Herói
     private void exibirMenuHeroi() {
         System.out.println("----------------------------------------");
@@ -460,4 +551,7 @@ public class Batalha {
         System.out.println("5. Exibir Status do Herói (não consome turno)");
         System.out.println("----------------------------------------");
     }
+    // =================================================================
+    // FIM COMMIT 15: MENU DO HERÓI
+    // =================================================================
 }
