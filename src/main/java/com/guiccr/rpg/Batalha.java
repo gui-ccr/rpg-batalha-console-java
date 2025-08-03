@@ -167,13 +167,13 @@ public class Batalha {
                                 try {
                                     System.out.print("Escolha uma opção do inventário: ");
                                     opcaoInventario = scanner.nextInt();
-                                    if (opcaoInventario >= 1 && opcaoInventario <= 4) {
+                                    if (opcaoInventario >= 1 && opcaoInventario <= 5) {
                                         entradaInventarioValida = true;
                                     } else {
-                                        System.out.println(ConsoleColors.RED + "Opção inválida. Digite 1, 2, 3 ou 4." + ConsoleColors.RESET);
+                                        System.out.println(ConsoleColors.RED + "Opção inválida. Digite 1, 2, 3, 4 ou 5." + ConsoleColors.RESET);
                                     }
                                 } catch (InputMismatchException e) {
-                                    System.out.println(ConsoleColors.RED + "Entrada inválida. Digite um número (1-4)." + ConsoleColors.RESET);
+                                    System.out.println(ConsoleColors.RED + "Entrada inválida. Digite um número (1-5)." + ConsoleColors.RESET);
                                     scanner.next();
                                 }
                             }
@@ -189,10 +189,13 @@ public class Batalha {
                                 case 2: // Equipar Item
                                     equiparItemInventario(); // Não consome turno
                                     break;
-                                case 3: // Ver Inventário Detalhado
+                                case 3: // Desequipar Item
+                                    desequiparItemInventario(); // Não consome turno
+                                    break;
+                                case 4: // Ver Inventário Detalhado
                                     verInventarioDetalhado(); // Não consome turno
                                     break;
-                                case 4: // Voltar
+                                case 5: // Voltar
                                     System.out.println(ConsoleColors.YELLOW + "Retornando ao menu de batalha..." + ConsoleColors.RESET);
                                     MenuPrincipal.pausar(800);
                                     voltarAoMenuPrincipal = true;
@@ -378,8 +381,9 @@ public class Batalha {
         System.out.println("----------------------------------------");
         System.out.println("1. Usar Item (consome turno)");
         System.out.println("2. Equipar Equipamento (não consome turno)");
-        System.out.println("3. Ver Inventário Detalhado (não consome turno)");
-        System.out.println("4. Voltar ao Menu de Batalha");
+        System.out.println("3. Desequipar Equipamento (não consome turno)");
+        System.out.println("4. Ver Inventário Detalhado (não consome turno)");
+        System.out.println("5. Voltar ao Menu de Batalha");
         System.out.println("----------------------------------------");
         
         // Verifica se há itens no inventário (sem exibi-los aqui)
@@ -486,9 +490,71 @@ public class Batalha {
         
         System.out.println("\nEquipando item...");
         MenuPrincipal.pausar(800);
-        heroi.getInventario().equiparItem(indiceEquipar, heroi);
+        
+        // Usa o novo método que integra com o sistema de equipamentos
+        if (heroi.getInventario().equiparItemDoInventario(indiceEquipar, heroi)) {
+            System.out.println(ConsoleColors.GREEN + "Equipamento alterado com sucesso!" + ConsoleColors.RESET);
+        } else {
+            System.out.println(ConsoleColors.RED + "Não foi possível equipar o item." + ConsoleColors.RESET);
+        }
+        MenuPrincipal.pausar(1500);
+    }
+    
+    /**
+     * Gerencia desequipar itens equipados
+     */
+    private void desequiparItemInventario() {
+        System.out.println("\n" + ConsoleColors.PURPLE + "=== DESEQUIPAR EQUIPAMENTO ===" + ConsoleColors.RESET);
+        MenuPrincipal.pausar(500);
+        System.out.println("Verificando equipamentos equipados...");
+        MenuPrincipal.pausar(800);
+        
+        // Verifica quais equipamentos estão equipados
+        var equipamentosEquipados = heroi.getEquipamentos();
+        if (equipamentosEquipados.isEmpty()) {
+            System.out.println(ConsoleColors.RED + "Nenhum equipamento está equipado no momento!" + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1500);
+            return;
+        }
+        
+        // Exibe os equipamentos equipados
+        System.out.println("Equipamentos equipados:");
+        java.util.List<String> tiposEquipados = new java.util.ArrayList<>(equipamentosEquipados.keySet());
+        for (int i = 0; i < tiposEquipados.size(); i++) {
+            String tipo = tiposEquipados.get(i);
+            Equipavel equipamento = equipamentosEquipados.get(tipo);
+            System.out.println((i + 1) + ". " + tipo.toUpperCase() + ": " + 
+                             ((Item) equipamento).getNome() + " - " + ((Item) equipamento).getDescricao());
+        }
+        
         MenuPrincipal.pausar(1000);
-        System.out.println(ConsoleColors.GREEN + "Equipamento alterado com sucesso!" + ConsoleColors.RESET);
+        System.out.print("Digite o número do equipamento que deseja desequipar (0 para cancelar): ");
+        int numDesequipar = scanner.nextInt();
+        scanner.nextLine();
+        
+        if (numDesequipar == 0) {
+            System.out.println(ConsoleColors.YELLOW + "Desequipar cancelado." + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1000);
+            return;
+        }
+        
+        int indiceDesequipar = numDesequipar - 1;
+        if (indiceDesequipar < 0 || indiceDesequipar >= tiposEquipados.size()) {
+            System.out.println(ConsoleColors.RED + "Número inválido!" + ConsoleColors.RESET);
+            MenuPrincipal.pausar(1500);
+            return;
+        }
+        
+        String tipoParaDesequipar = tiposEquipados.get(indiceDesequipar);
+        System.out.println("\nDesequipando item...");
+        MenuPrincipal.pausar(800);
+        
+        // Desequipa o item e adiciona de volta ao inventário
+        if (heroi.desequiparItemParaInventario(tipoParaDesequipar)) {
+            System.out.println(ConsoleColors.GREEN + "Equipamento desequipado com sucesso!" + ConsoleColors.RESET);
+        } else {
+            System.out.println(ConsoleColors.RED + "Não foi possível desequipar o item." + ConsoleColors.RESET);
+        }
         MenuPrincipal.pausar(1500);
     }
     
