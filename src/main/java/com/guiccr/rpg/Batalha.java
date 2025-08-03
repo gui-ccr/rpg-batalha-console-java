@@ -11,7 +11,7 @@ public class Batalha {
     private int turnos;
 
     // Construtor da batalha: recebe o herói, o monstro E o Scanner da Main
-    public Batalha(Heroi heroi, Monstro monstro, Scanner scanner) { // MODIFICADO AQUI: Adicionado Scanner
+    public Batalha(Heroi heroi, Monstro monstro, Scanner scanner) { 
         // Validações básicas para garantir que os combatentes não sejam nulos.
         if (heroi == null || monstro == null) {
             throw new IllegalArgumentException("Herói e Monstro não podem ser nulos para iniciar a batalha.");
@@ -117,6 +117,7 @@ public class Batalha {
         if (heroi.estaVivo()) {
             System.out.println("🎉 VITÓRIA! " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET
                     + " derrotou " + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET + "!");
+            RepositorioDeHerois.atualizarHeroi(heroi);
         } else if (monstro.estaVivo()) {
             System.out.println("💀 DERROTA! " + ConsoleColors.BLACK + monstro.getNome() + ConsoleColors.RESET
                     + " derrotou " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + ".");

@@ -13,8 +13,9 @@ public class MenuPrincipal {
         System.out.println("          RPG BATALHA POR TURNOS - CÓDIGO AMALDIÇOADO");
         System.out.println("========================================================");
         System.out.println("\nEscolha o que deseja fazer:");
-        System.out.println(" 1: Iniciar Nova Batalha");
-        System.out.println(" 2: Sair do Jogo");
+        System.out.println(" 1: Iniciar Novo jogo");
+        System.out.println(" 2: Carregar jogo");
+        System.out.println(" 3: Sair do Jogo");
         System.out.print("Sua opção: ");
     }
 
@@ -27,16 +28,16 @@ public class MenuPrincipal {
         while (!entradaValida) {
             try {
                 escolha = scanner.nextInt(); // Tenta ler um número
-                if (escolha >= 1 && escolha <= 2) { // As opções válidas são 1 ou 2
+                if (escolha >= 1 && escolha <= 3) { // As opções válidas são 1 ate 3
                     entradaValida = true;
                 } else {
                     System.out.println("\n--- Opção inválida! ---"); // Mensagem de erro clara
-                    System.out.println("Por favor, digite 1 para INICIAR a batalha ou 2 para SAIR do jogo.");
+                    System.out.println("Por favor, digite 1 para INICIAR a batalha ou 2 para CARREGAR um jogo ou 3 para SAIR do jogo.");
                     exibirOpcoes(); // Reexibe as opções completas após erro
                 }
             } catch (InputMismatchException e) { // Captura se o usuário digitar algo que não é número
                 System.out.println("\n--- Entrada inválida! ---");
-                System.out.println("O que você digitou não é um número. Por favor, digite 1 ou 2.");
+                System.out.println("O que você digitou não é um número. Por favor, digite 1 ou 2 ou 3.");
                 scanner.next(); // Limpa o buffer do scanner para evitar loop infinito
                 exibirOpcoes(); // Reexibe as opções completas
             }
