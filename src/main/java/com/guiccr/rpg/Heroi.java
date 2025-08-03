@@ -11,9 +11,10 @@ public class Heroi extends Personagem {
     private int nivel;
     private int experienciaAtual;
     private int experienciaParaProximoNivel;
+    private Inventario inventario;
 
     // Construtor 1: Para criar um NOVO herói (recebe atributos OP)
-    public Heroi(String nome, int forca, int agilidade, int vigor, int presenca, int intelecto, int energiaInicial) {
+    public Heroi(String nome, int forca, int agilidade, int vigor, int presenca, int intelecto, int energiaInicial, Inventario inventario) {
         // --- CHAMADA super() DEVE SER A PRIMEIRA ---
         super(nome, 
               calcularVidaMaxima(vigor), 
@@ -38,13 +39,14 @@ public class Heroi extends Personagem {
         this.nivel = 1;
         this.experienciaAtual = 0;
         this.experienciaParaProximoNivel = calcularEXPParaProximoNivel(this.nivel);
+        this.inventario = inventario != null ? inventario : new Inventario(); // Inicializa inventário
     }
     
     // Construtor 2: Para CARREGAR um herói do banco de dados (recebe todos os atributos)
     public Heroi(int id, String nome, int vidaAtual, int vidaMaxima, int ataque, int defesa,
                  int chanceCritico, double multiplicadorCritico, int chanceEsquiva,
                  int energia, int forca, int agilidade, int vigor, int presenca, int intelecto,
-                 int nivel, int experienciaAtual, int experienciaParaProximoNivel) {
+                 int nivel, int experienciaAtual, int experienciaParaProximoNivel, Inventario inventario) {
         // --- CHAMADA super() CORRETA ---
         // Usa o construtor de Personagem que aceita a vida atual como parâmetro
         super(nome, vidaAtual, vidaMaxima, ataque, defesa, chanceCritico, multiplicadorCritico, chanceEsquiva);
@@ -59,6 +61,7 @@ public class Heroi extends Personagem {
         this.nivel = nivel;
         this.experienciaAtual = experienciaAtual;
         this.experienciaParaProximoNivel = experienciaParaProximoNivel;
+        this.inventario = inventario != null ? inventario : new Inventario(); // Inicializa inventário
     }
     
     // --- GETTERS e SETTERS (somente getters para energia, forca, etc.)
@@ -71,6 +74,93 @@ public class Heroi extends Personagem {
     public int getNivel() { return this.nivel; }
     public int getExperienciaAtual() { return this.experienciaAtual; }
     public int getExperienciaParaProximoNivel() { return this.experienciaParaProximoNivel; }
+    public Inventario getInventario() { return this.inventario; }
+
+    // --- MÉTODO EXIBIR STATUS SOBRESCRITO (mais detalhado para heróis) ---
+    @Override
+    public void exibirStatus() {
+        System.out.println("\n" + ConsoleColors.CYAN_BRIGHT + ConsoleColors.BOLD + "═══════════════════════════════════════════════════════" + ConsoleColors.RESET);
+        MenuPrincipal.pausar(200); // Pausa visual
+        System.out.println(ConsoleColors.CYAN_BRIGHT + ConsoleColors.BOLD + "                    STATUS DE " + this.getNome().toUpperCase() + ConsoleColors.RESET);
+        MenuPrincipal.pausar(300); // Pausa visual
+        System.out.println(ConsoleColors.CYAN_BRIGHT + ConsoleColors.BOLD + "═══════════════════════════════════════════════════════" + ConsoleColors.RESET);
+        MenuPrincipal.pausar(400); // Pausa visual
+        
+        // Barra de Vida
+        final int COMPRIMENTO_BARRA_HP = 20;
+        double porcentagemVida = (double) this.getVidaAtual() / this.getVidaMaxima();
+        int partesPreenchidas = (int) (porcentagemVida * COMPRIMENTO_BARRA_HP);
+        int partesVazias = COMPRIMENTO_BARRA_HP - partesPreenchidas;
+        StringBuilder barraVida = new StringBuilder();
+        barraVida.append("[");
+        for (int i = 0; i < partesPreenchidas; i++) barraVida.append("█");
+        for (int i = 0; i < partesVazias; i++) barraVida.append("-");
+        barraVida.append("]");
+        String corVida = (porcentagemVida > 0.5) ? ConsoleColors.GREEN : (porcentagemVida > 0.2) ? ConsoleColors.YELLOW : ConsoleColors.RED;
+        
+        // Barra de Energia
+        final int energiaMaxima = 100; // Assumindo energia máxima de 100
+        double porcentagemEnergia = Math.min((double) this.energia / energiaMaxima, 1.0);
+        int energiaPreenchida = (int) (porcentagemEnergia * COMPRIMENTO_BARRA_HP);
+        int energiaVazia = COMPRIMENTO_BARRA_HP - energiaPreenchida;
+        StringBuilder barraEnergia = new StringBuilder();
+        barraEnergia.append("[");
+        for (int i = 0; i < energiaPreenchida; i++) barraEnergia.append("█");
+        for (int i = 0; i < energiaVazia; i++) barraEnergia.append("-");
+        barraEnergia.append("]");
+        String corEnergia = (porcentagemEnergia > 0.5) ? ConsoleColors.CYAN : (porcentagemEnergia > 0.2) ? ConsoleColors.YELLOW : ConsoleColors.RED;
+        
+        // Barra de Experiência
+        double porcentagemExp = (double) this.experienciaAtual / this.experienciaParaProximoNivel;
+        int expPreenchida = (int) (porcentagemExp * COMPRIMENTO_BARRA_HP);
+        int expVazia = COMPRIMENTO_BARRA_HP - expPreenchida;
+        StringBuilder barraExp = new StringBuilder();
+        barraExp.append("[");
+        for (int i = 0; i < expPreenchida; i++) barraExp.append("█");
+        for (int i = 0; i < expVazia; i++) barraExp.append("-");
+        barraExp.append("]");
+        
+        // Exibir informações principais com pausas visuais
+        System.out.printf("%-12s %s%s%s (%s%d/%d%s)%n", 
+                         "+ VIDA:", corVida, barraVida.toString(), ConsoleColors.RESET, 
+                         corVida, this.getVidaAtual(), this.getVidaMaxima(), ConsoleColors.RESET);
+        MenuPrincipal.pausar(500);
+        
+        System.out.printf("%-12s %s%s%s (%s%d%s)%n", 
+                         "* ENERGIA:", corEnergia, barraEnergia.toString(), ConsoleColors.RESET, 
+                         corEnergia, this.energia, ConsoleColors.RESET);
+        MenuPrincipal.pausar(500);
+        
+        System.out.printf("%-12s %s%s%s (%s%d/%d%s)%n", 
+                         "~ EXP:", ConsoleColors.PURPLE, barraExp.toString(), ConsoleColors.RESET, 
+                         ConsoleColors.PURPLE, this.experienciaAtual, this.experienciaParaProximoNivel, ConsoleColors.RESET);
+        MenuPrincipal.pausar(500);
+        
+        System.out.println(ConsoleColors.CYAN_BRIGHT + "───────────────────────────────────────────────────────" + ConsoleColors.RESET);
+        MenuPrincipal.pausar(400);
+        
+        // Atributos do herói com pausas visuais
+        System.out.printf("%-8s %s[ATQ: %d]%s  |  %s[DEF: %d]%s  |  %s[Crit: %d%%]%s%n",
+                         "COMBATE:", ConsoleColors.RED, this.getAtaque(), ConsoleColors.RESET,
+                         ConsoleColors.BLUE, this.getDefesa(), ConsoleColors.RESET,
+                         ConsoleColors.YELLOW, this.getChanceCritico(), ConsoleColors.RESET);
+        MenuPrincipal.pausar(600);
+        
+        System.out.printf("%-8s %sFOR: %d%s  |  %sAGI: %d%s  |  %sVIG: %d%s%n",
+                         "BASE:", ConsoleColors.RED, this.forca, ConsoleColors.RESET,
+                         ConsoleColors.GREEN, this.agilidade, ConsoleColors.RESET,
+                         ConsoleColors.RED_BRIGHT, this.vigor, ConsoleColors.RESET);
+        MenuPrincipal.pausar(600);
+        
+        System.out.printf("%-8s %sPRE: %d%s  |  %sINT: %d%s  |  %sLVL: %d%s%n",
+                         "", ConsoleColors.PURPLE, this.presenca, ConsoleColors.RESET,
+                         ConsoleColors.CYAN, this.intelecto, ConsoleColors.RESET,
+                         ConsoleColors.YELLOW_BRIGHT, this.nivel, ConsoleColors.RESET);
+        MenuPrincipal.pausar(600);
+        
+        System.out.println(ConsoleColors.CYAN_BRIGHT + ConsoleColors.BOLD + "═══════════════════════════════════════════════════════" + ConsoleColors.RESET);
+        MenuPrincipal.pausar(800); // Pausa final para o usuário processar as informações
+    }
 
     // --- MÉTODOS DE LEVEL UP E EXPERIÊNCIA ---
     public void ganharExperiencia(int expGanha) {
