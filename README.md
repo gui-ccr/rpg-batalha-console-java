@@ -15,7 +15,6 @@ Todos os direitos sobre a obra "Ordem Paranormal RPG" e seus elementos pertencem
 ## ✨ Funcionalidades Principais
 
 ### 🎮 **Sistema de Jogo Completo**
-* **Criação de Heróis:** Personalize seu herói com atributos únicos (Força, Agilidade, Vigor, Presença, Intelecto)
 * **Sistema de Combate Avançado:** Batalhas por turnos com ataques normais e habilidades especiais
 * **Mecânicas de RPG:** Sistema de crítico, esquiva, dano mínimo e consumo de energia
 * **Progressão de Personagem:** Sistema de experiência e evolução de nível
