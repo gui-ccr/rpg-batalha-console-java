@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "🎮 Executar RPG Batalha Console",
+            "request": "launch",
+            "mainClass": "com.guiccr.rpg.Main",
+            "projectName": "rpg-batalha-console-java",
+            "classPaths": [
+                "${workspaceFolder}/target/classes",
+                "${workspaceFolder}/lib/*"
+            ],
+            "console": "integratedTerminal",
+            "args": [],
+            "vmArgs": [],
+            "preLaunchTask": "Compilar projeto"
+        }
+    ]
+}
