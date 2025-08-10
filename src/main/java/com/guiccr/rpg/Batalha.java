@@ -296,10 +296,16 @@ public class Batalha {
         if (heroi.estaVivo()) {
             System.out.println("🎉 VITÓRIA! " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET
                     + " derrotou " + ConsoleColors.RED + monstro.getNome() + ConsoleColors.RESET + "!");
+            // aqui vou desequipar os itens do heroi para que nao tenha bug de conseguir aumentar o dano infinitamente
+            heroi.desequiparItem("arma");
+
+
             RepositorioDeHerois.atualizarHeroi(heroi);
         } else if (monstro.estaVivo()) {
             System.out.println("💀 DERROTA! " + ConsoleColors.RED + monstro.getNome() + ConsoleColors.RESET
                     + " derrotou " + ConsoleColors.CYAN_BRIGHT + heroi.getNome() + ConsoleColors.RESET + ".");
+            heroi.desequiparItem("arma");
+            RepositorioDeHerois.atualizarHeroi(heroi);
         } else {
             System.out.println("🤝 EMPATE! Ambos os combatentes caíram."); // Caso ambos sejam derrotados no mesmo turno
         }
