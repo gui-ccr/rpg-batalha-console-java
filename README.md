@@ -43,6 +43,7 @@
       - [READ: Carregando Heróis Salvos](#read-carregando-heróis-salvos)
       - [UPDATE: Atualizando o Progresso do Herói](#update-atualizando-o-progresso-do-herói)
       - [DELETE: Excluindo um Herói](#delete-excluindo-um-herói)
+  - [📚 Quer se Aprofundar? Acesse a Wiki!](https://github.com/gui-ccr/rpg-batalha-console-java/wiki)
   - [🚀 Comece a Jogar em 5 Minutos](#-comece-a-jogar-em-5-minutos)
     - [**📋 Pré-requisitos**](#-pré-requisitos)
     - [**▶️ Executando o Jogo**](#️-executando-o-jogo)
@@ -235,17 +236,20 @@ Siga os passos abaixo para mergulhar na aventura.
 ### **▶️ Executando o Jogo**
 
 <details>
-<summary><strong>Método 1: Para Jogadores (Windows - O Mais Fácil)</strong></summary>
+<summary><strong>Opção 1: Para Jogadores (Recomendado)</strong></summary>
 
-1.  Baixe o projeto como **ZIP** e extraia a pasta.
-2.  Entre na pasta extraída.
-3.  Execute o arquivo `Jogar.bat` com um duplo clique.
-4.  O script cuidará da compilação e execução. Divirta-se! 🎮
+1.  Vá para a **[Página de Releases](https://github.com/gui-ccr/rpg-batalha-console-java/releases)** do projeto.
+2.  Baixe o arquivo `.jar` da versão mais recente (ex: `rpg-batalha-console-java-1.0.0-jar-with-dependencies.jar`).
+3.  Abra um terminal na pasta onde você baixou o arquivo e execute:
+    ```bash
+    java -jar nome-do-arquivo.jar
+    ```
+4.  Divirta-se! 🎮
 
 </details>
 
 <details>
-<summary><strong>Método 2: Para Desenvolvedores (Multiplataforma)</strong></summary>
+<summary><strong>Opção 2: Para Desenvolvedores (Multiplataforma)</strong></summary>
 
 1.  **Clone o repositório:**
     ```bash
@@ -278,7 +282,6 @@ Siga os passos abaixo para mergulhar na aventura.
 <div align="center">
     <img src="assets/Tela de Batalha.png" alt="Tela de Batalha" width="45%">
     <img src="assets/Inventario.png" alt="Inventário" width="45%">
-    <img src="assets/Menu Principal.png" alt="Menu Principal" width="45%">
 </div>
 
 ---
@@ -295,6 +298,9 @@ rpg-batalha-console-java/
 ├── src/
 │   └── main/java/com/guiccr/rpg/
 │       ├── Main.java                # Ponto de entrada
+│       ├── ConsoleColors.java       # Arquivo de Enums de cores do terminal
+│       ├── GeradorDeNomes.java      # Gerador de nomes
+│       ├── MenuPrincipal.java       # Menu Principal
 │       ├── model/                   # Pacote para entidades (Heroi, Monstro)
 │       ├── repository/              # Pacote para acesso a dados
 │       └── service/                 # Pacote para regras de negócio (Batalha)
@@ -303,8 +309,19 @@ rpg-batalha-console-java/
 ├── LICENSE
 └── README.md
 ```
----
 
+---
+## 📚 Quer se Aprofundar? Acesse a Wiki!
+
+Este `README` oferece uma visão geral do projeto. Para um mergulho profundo na **arquitetura**, nas **mecânicas de jogo**, no **diagrama de classes UML** e em outras documentações técnicas, a **Wiki** do projeto é o seu destino!
+
+<div align="center">
+
+<h3><a href="https://github.com/gui-ccr/rpg-batalha-console-java/wiki">➡️ Acessar a Wiki do Projeto</a></h3>
+
+</div>
+
+---
 ## 📈 Roadmap de Desenvolvimento
 
 O projeto segue um plano de desenvolvimento claro, com futuras expansões já idealizadas.
@@ -317,7 +334,8 @@ O projeto segue um plano de desenvolvimento claro, com futuras expansões já id
     -   [ ] Adicionar testes unitários (JUnit).
     -   [x] Refatorar para pacotes de `model`, `service` e `repository`.
     -   [ ] Implementar um sistema de Log (ex: Log4j).
--   [ ] **Fase 5: Futuras Funcionalidades:**
+- [x] **Fase 5: Empacotamento e Release v1.0.0**
+-   [ ] **Fase 6: Futuras Funcionalidades:**
     -   [ ] Sistema de classes de Herói (Guerreiro, Mago).
     -   [ ] Múltiplos tipos de monstros.
     -   [ ] Masmorras com múltiplas batalhas.
