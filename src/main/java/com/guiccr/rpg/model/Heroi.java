@@ -1,4 +1,5 @@
 package com.guiccr.rpg.model;
+// Arquivo movido para o pacote model em 18/08/2025
 
 import java.util.Map;
 
