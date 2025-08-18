@@ -1,81 +1,92 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Compilar projeto",
-            "type": "shell",
-            "command": "javac",
-            "args": [
-                "-d",
-                "${workspaceFolder}/target/classes",
-                "-cp",
-                "${workspaceFolder}/lib/*",
-                "${workspaceFolder}/src/main/java/com/guiccr/rpg/*.java"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "silent",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "dependsOrder": "sequence",
-            "dependsOn": "Criar diretório target",
-            "problemMatcher": []
-        },
-        {
-            "label": "Criar diretório target",
-            "type": "shell",
-            "command": "mkdir",
-            "args": [
-                "-p",
-                "${workspaceFolder}/target/classes"
-            ],
-            "windows": {
-                "command": "cmd",
-                "args": [
-                    "/c",
-                    "if not exist \"${workspaceFolder}\\target\\classes\" mkdir \"${workspaceFolder}\\target\\classes\""
-                ]
-            },
-            "group": "build",
-            "presentation": {
-                "echo": false,
-                "reveal": "never",
-                "focus": false,
-                "panel": "shared"
-            }
-        },
-        {
-            "label": "🧹 Limpar compilação",
-            "type": "shell",
-            "command": "rm",
-            "args": [
-                "-rf",
-                "${workspaceFolder}/target"
-            ],
-            "windows": {
-                "command": "cmd",
-                "args": [
-                    "/c",
-                    "if exist \"${workspaceFolder}\\target\" rmdir /s /q \"${workspaceFolder}\\target\""
-                ]
-            },
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared"
-            }
-        }
-    ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Compilar projeto",
+			"type": "shell",
+			"command": "javac",
+			"args": [
+				"-d",
+				"${workspaceFolder}/target/classes",
+				"-cp",
+				"${workspaceFolder}/lib/*",
+				"${workspaceFolder}/src/main/java/com/guiccr/rpg/*.java"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"dependsOrder": "sequence",
+			"dependsOn": "Criar diretório target",
+			"problemMatcher": []
+		},
+		{
+			"label": "Criar diretório target",
+			"type": "shell",
+			"command": "mkdir",
+			"args": [
+				"-p",
+				"${workspaceFolder}/target/classes"
+			],
+			"windows": {
+				"command": "cmd",
+				"args": [
+					"/c",
+					"if not exist \"${workspaceFolder}\\target\\classes\" mkdir \"${workspaceFolder}\\target\\classes\""
+				]
+			},
+			"group": "build",
+			"presentation": {
+				"echo": false,
+				"reveal": "never",
+				"focus": false,
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "🧹 Limpar compilação",
+			"type": "shell",
+			"command": "rm",
+			"args": [
+				"-rf",
+				"${workspaceFolder}/target"
+			],
+			"windows": {
+				"command": "cmd",
+				"args": [
+					"/c",
+					"if exist \"${workspaceFolder}\\target\" rmdir /s /q \"${workspaceFolder}\\target\""
+				]
+			},
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Executar RPG Console (classpath manual)",
+			"type": "shell",
+			"command": "java",
+			"args": [
+				"-cp",
+				"target/classes;lib/sqlite-jdbc-3.50.3.0.jar",
+				"com.guiccr.rpg.Main"
+			],
+			"group": "build"
+		}
+	]
 }
