@@ -35,6 +35,12 @@
   - [📜 Índice](#-índice)
   - [✨ Funcionalidades Principais](#-funcionalidades-principais)
   - [🛠️ Tecnologias e Conceitos Aplicados](#️-tecnologias-e-conceitos-aplicados)
+    - [O que é CRUD?](#o-que-é-crud)
+    - [Implementação no Projeto](#implementação-no-projeto)
+      - [CREATE: Salvando um Novo Herói](#create-salvando-um-novo-herói)
+      - [READ: Carregando Heróis Salvos](#read-carregando-heróis-salvos)
+      - [UPDATE: Atualizando o Progresso do Herói](#update-atualizando-o-progresso-do-herói)
+      - [DELETE: Excluindo um Herói](#delete-excluindo-um-herói)
   - [🚀 Comece a Jogar em 5 Minutos](#-comece-a-jogar-em-5-minutos)
     - [**📋 Pré-requisitos**](#-pré-requisitos)
     - [**▶️ Executando o Jogo**](#️-executando-o-jogo)
@@ -77,6 +83,121 @@ Este projeto foi uma excelente oportunidade para aplicar um vasto conjunto de co
 * **Composição:** O `Heroi` *tem um* `Inventario`, que por sua vez *tem uma lista* de `Item`.
 
 </details>
+
+
+<details>
+<summary><strong>💾 Camada de Persistência e Padrão CRUD </strong></summary>
+<img src="assets/CRUD.png" alt="Gameplay do Jogo" width="80%">
+
+<br>
+
+A capacidade de salvar e carregar o progresso é crucial para a experiência do jogador. Este projeto implementa uma camada de persistência de dados utilizando um banco de dados **SQLite**, orquestrada através do padrão de arquitetura **CRUD**.
+
+### O que é CRUD?
+
+CRUD é um acrônimo para as quatro operações essenciais que uma aplicação realiza sobre dados persistentes. É a base para a maioria das aplicações que interagem com bancos de dados.
+
+* **CREATE (Criar):** Adicionar novos registros no banco de dados.
+* **READ (Ler):** Consultar dados que já existem no banco.
+* **UPDATE (Atualizar):** Modificar um registro existente.
+* **DELETE (Deletar):** Remover permanentemente um registro.
+
+### Implementação no Projeto
+
+A classe `RepositorioDeHerois` é a responsável por traduzir as necessidades do jogo em comandos para o banco de dados, aplicando concretamente cada uma das operações CRUD.
+
+#### CREATE: Salvando um Novo Herói
+Quando o jogador cria um novo personagem, o método `salvar()` é invocado para inserir os dados do novo herói na tabela.
+
+```java
+// Em: src/main/java/com/guiccr/rpg/repository/RepositorioDeHerois.java
+public static void salvarHeroi(Heroi heroi) {
+        garantirColunaVidaAtual(); // Garantir que a coluna existe antes de salvar
+        garantirTabelaInventario(); // Garantir que a tabela de inventário existe
+        String sql = "INSERT OR REPLACE INTO herois (nome, vida_atual, vida_maxima, ataque, defesa, chance_critico, multiplicador_critico, chance_esquiva, energia, forca, agilidade, vigor, presenca, intelecto, nivel, experiencia_atual, experiencia_para_proximo_nivel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conexao = DriverManager.getConnection(URL_JDBC);
+             PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
+            preparedStatement.setString(1, heroi.getNome());
+                 // outros sets....
+             } catch (SQLException e) {
+            System.err.println("Erro ao salvar o herói no banco de dados: " + e.getMessage());
+        }
+```
+
+#### READ: Carregando Heróis Salvos
+Para que o jogador possa continuar uma aventura, o método `buscarTodos()` consulta e retorna uma lista com todos os heróis salvos.
+
+```java
+// Em: src/main/java/com/guiccr/rpg/repository/RepositorioDeHerois.java
+public static Optional<Heroi> buscarHeroi(String nome) {
+        garantirColunaVidaAtual(); // Garantir que a coluna existe antes de buscar
+        String sql = "SELECT * FROM herois WHERE nome = ?;";
+        try (Connection conexao = DriverManager.getConnection(URL_JDBC);
+             PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
+            preparedStatement.setString(1, nome);
+            try (ResultSet resultado = preparedStatement.executeQuery()) {
+                if (resultado.next()) {
+                    Heroi heroiEncontrado = new Heroi(
+                        resultado.getInt("id"),
+                    resultado.getString("nome"),
+                 // outros getters.....
+                 return Optional.of(heroiEncontrado));
+                }
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar herói no banco de dados: " + e.getMessage());
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
+```
+
+#### UPDATE: Atualizando o Progresso do Herói
+Após uma batalha ou ao subir de nível, o método `atualizar()` é chamado para persistir as novas informações (nível, experiência, vida, etc.) do herói no banco.
+
+```java
+// Em: src/main/java/com/guiccr/rpg/repository/RepositorioDeHerois.java
+public static void atualizarHeroi(Heroi heroi) {
+        garantirColunaVidaAtual(); // Garantir que a coluna existe antes de atualizar
+        String sql = "UPDATE herois SET " +
+                     "nome = ?, vida_atual = ?, vida_maxima = ?, ataque = ?, defesa = ?, chance_critico = ?, " +
+                     "multiplicador_critico = ?, chance_esquiva = ?, energia = ?, forca = ?, " +
+                     "agilidade = ?, vigor = ?, presenca = ?, intelecto = ?, nivel = ?, " +
+                     "experiencia_atual = ?, experiencia_para_proximo_nivel = ? " +
+                     "WHERE nome = ?;";
+        try (Connection conexao = DriverManager.getConnection(URL_JDBC);
+             PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
+            preparedStatement.setString(1, heroi.getNome());
+             // outros getters....
+             }} catch (SQLException e) {
+            System.err.println("Erro ao atualizar o herói no banco de dados: " + e.getMessage());
+        }
+    }
+             
+```
+
+#### DELETE: Excluindo um Herói
+Quando o jogador escolhe excluir um personagem, o método `excluir()` executa o comando `DELETE` para remover o registro do herói do banco de dados.
+
+```java
+// Em: src/main/java/com/guiccr/rpg/repository/RepositorioDeHerois.java
+public static void deletarHeroi(String nome) {
+        String sql = "DELETE FROM herois WHERE nome = ?;";
+        try (Connection conexao = DriverManager.getConnection(URL_JDBC);
+             PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
+            preparedStatement.setString(1, nome);
+            int linhasAfetadas = preparedStatement.executeUpdate();
+            if (linhasAfetadas > 0) System.out.println("Herói " + nome + " deletado com sucesso!");
+            else System.out.println("Nenhum herói encontrado com o nome " + nome + " para ser deletado.");
+        } catch (SQLException e) {
+            System.err.println("Erro ao deletar o herói do banco de dados: " + e.getMessage());
+        }
+    }
+```
+
+</details>
+
 
 <details>
 <summary><strong>💻 Stack de Desenvolvimento e Ferramentas</strong></summary>
@@ -153,10 +274,9 @@ Siga os passos abaixo para mergulhar na aventura.
 ## 📸 Galeria do Jogo
 
 <div align="center">
-    <img src="assets/Menu Principal.png" alt="Menu Principal" width="45%">
     <img src="assets/Tela de Batalha.png" alt="Tela de Batalha" width="45%">
-    <img src="https://github.com/gui-ccr/rpg-batalha-console-java/blob/main/assets/levelup.png?raw=true" alt="Tela de Level Up" width="45%">
-    <img src="https://github.com/gui-ccr/rpg-batalha-console-java/blob/main/assets/inventario.png?raw=true" alt="Inventário" width="45%">
+    <img src="assets/Inventario.png" alt="Inventário" width="45%">
+    <img src="assets/Menu Principal.png" alt="Menu Principal" width="45%">
 </div>
 
 ---
@@ -167,7 +287,6 @@ A estrutura de pastas foi organizada para separar responsabilidades, seguindo as
 
 ```
 rpg-batalha-console-java/
-├── .github/          # (Opcional) Para templates de Issues, PRs, etc.
 ├── assets/           # Imagens e GIFs para o README
 ├── db/               # Scripts e banco de dados
 ├── lib/              # Dependências .jar (JDBC Driver)
@@ -177,7 +296,6 @@ rpg-batalha-console-java/
 │       ├── model/                   # Pacote para entidades (Heroi, Monstro)
 │       ├── repository/              # Pacote para acesso a dados
 │       └── service/                 # Pacote para regras de negócio (Batalha)
-├── target/           # Classes compiladas (gerado automaticamente)
 ├── .gitignore
 ├── Jogar.bat         # Script de execução para Windows
 ├── LICENSE

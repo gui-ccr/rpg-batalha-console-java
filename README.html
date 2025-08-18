@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x2694;&#xfe0f; RPG Batalha por Turnos - Opera&ccedil;&atilde;o&colon; C&oacute;digo Amaldi&ccedil;oado &#x2694;&#xfe0f;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <div align="center">
+<h1 id="️-rpg-batalha-por-turnos---operação-código-amaldiçoado-️">⚔️ RPG Batalha por Turnos - Operação: Código Amaldiçoado ⚔️</h1>
+<p><strong>Um simulador de batalha de RPG em console, construído com Java puro para demonstrar conceitos avançados de Programação Orientada a Objetos e design de software.</strong></p>
+</div>
+<div align="center">
+<img src="https://img.shields.io/badge/Java-17+-blue?style=for-the-badge&logo=java" alt="Java 17+">
+<img src="https://img.shields.io/badge/Database-SQLite-blue?style=for-the-badge&logo=sqlite" alt="SQLite">
+<img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License MIT">
+<img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge" alt="Status">
+</div>
+<br>
+<div align="center">
+<img src="file:///c:\Users\Itec Minasvix 3\Documents\rpg-batalha-console-java-v2\assets\Gameplay.gif" alt="Gameplay do Jogo" width="80%">
+</div>
+<hr>
+<blockquote>
+<p>Este projeto é um showcase técnico e um trabalho de fã inspirado no universo de <strong>Ordem Paranormal RPG</strong>. Ele foi criado com o objetivo de aplicar e solidificar conhecimentos em desenvolvimento de software, desde os fundamentos de POO até a persistência de dados com um banco de dados local.</p>
+</blockquote>
+<br>
+<h2 id="-índice">📜 Índice</h2>
+<ul>
+<li><a href="#%EF%B8%8F-rpg-batalha-por-turnos---opera%C3%A7%C3%A3o-c%C3%B3digo-amaldi%C3%A7oado-%EF%B8%8F">⚔️ RPG Batalha por Turnos - Operação: Código Amaldiçoado ⚔️</a>
+<ul>
+<li><a href="#-%C3%ADndice">📜 Índice</a></li>
+<li><a href="#-funcionalidades-principais">✨ Funcionalidades Principais</a></li>
+<li><a href="#%EF%B8%8F-tecnologias-e-conceitos-aplicados">🛠️ Tecnologias e Conceitos Aplicados</a>
+<ul>
+<li><a href="#o-que-%C3%A9-crud">O que é CRUD?</a></li>
+<li><a href="#implementa%C3%A7%C3%A3o-no-projeto">Implementação no Projeto</a>
+<ul>
+<li><a href="#create-salvando-um-novo-her%C3%B3i">CREATE: Salvando um Novo Herói</a></li>
+<li><a href="#read-carregando-her%C3%B3is-salvos">READ: Carregando Heróis Salvos</a></li>
+<li><a href="#update-atualizando-o-progresso-do-her%C3%B3i">UPDATE: Atualizando o Progresso do Herói</a></li>
+<li><a href="#delete-excluindo-um-her%C3%B3i">DELETE: Excluindo um Herói</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#-comece-a-jogar-em-5-minutos">🚀 Comece a Jogar em 5 Minutos</a>
+<ul>
+<li><a href="#-pr%C3%A9-requisitos"><strong>📋 Pré-requisitos</strong></a></li>
+<li><a href="#%EF%B8%8F-executando-o-jogo"><strong>▶️ Executando o Jogo</strong></a></li>
+</ul>
+</li>
+<li><a href="#-galeria-do-jogo">📸 Galeria do Jogo</a></li>
+<li><a href="#-estrutura-do-projeto">📂 Estrutura do Projeto</a></li>
+<li><a href="#-roadmap-de-desenvolvimento">📈 Roadmap de Desenvolvimento</a></li>
+<li><a href="#%EF%B8%8F-aviso-legal-e-cr%C3%A9ditos">⚠️ Aviso Legal e Créditos</a></li>
+<li><a href="#-licen%C3%A7a">📄 Licença</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="-funcionalidades-principais">✨ Funcionalidades Principais</h2>
+<p>Este projeto vai além de uma simples batalha. É um sistema de RPG completo com mecânicas pensadas para criar uma experiência de jogo dinâmica e re-jogável.</p>
+<table>
+<thead>
+<tr>
+<th>Funcionalidade</th>
+<th>Descrição</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⚔️ <strong>Combate por Turnos</strong></td>
+<td>Sistema de batalha com ataques normais, habilidades especiais, chance de crítico e esquiva.</td>
+<td>✅ Concluído</td>
+</tr>
+<tr>
+<td>💾 <strong>Persistência de Dados</strong></td>
+<td>Salve e carregue seus heróis! Todo o progresso é armazenado em um banco de dados <strong>SQLite</strong> local.</td>
+<td>✅ Concluído</td>
+</tr>
+<tr>
+<td>📈 <strong>Progressão de Herói</strong></td>
+<td>Ganhe experiência, suba de nível, e veja seus atributos e status de combate melhorarem automaticamente.</td>
+<td>✅ Concluído</td>
+</tr>
+<tr>
+<td>🎒 <strong>Sistema de Inventário</strong></td>
+<td>Colete, equipe espadas para aumentar seu dano e use poções para se curar no meio do combate.</td>
+<td>✅ Concluído</td>
+</tr>
+<tr>
+<td>🎨 <strong>UI de Console Rica</strong></td>
+<td>Interface colorida e com feedback claro para todas as ações, melhorando a experiência do jogador.</td>
+<td>✅ Concluído</td>
+</tr>
+<tr>
+<td>🎲 <strong>Nomes Aleatórios</strong></td>
+<td>Heróis e monstros recebem nomes dinâmicos a cada partida, garantindo variedade.</td>
+<td>✅ Concluído</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="️-tecnologias-e-conceitos-aplicados">🛠️ Tecnologias e Conceitos Aplicados</h2>
+<p>Este projeto foi uma excelente oportunidade para aplicar um vasto conjunto de conhecimentos teóricos em um cenário prático e funcional.</p>
+<details>
+<summary><strong>🧠 Conceitos de Programação Orientada a Objetos (POO)</strong></summary>
+<ul>
+<li><strong>Classes e Objetos:</strong> Modelagem de todas as entidades (<code>Heroi</code>, <code>Monstro</code>, <code>Item</code>).</li>
+<li><strong>Encapsulamento:</strong> Uso de <code>private</code> com Getters e Setters para proteger o estado dos objetos.</li>
+<li><strong>Herança:</strong> <code>Heroi</code> e <code>Monstro</code> herdam de uma classe abstrata <code>Personagem</code>.</li>
+<li><strong>Polimorfismo:</strong> Sobrescrita de métodos como <code>atacar()</code> para comportamentos específicos.</li>
+<li><strong>Classes Abstratas:</strong> <code>Personagem</code> e <code>Item</code> como contratos base.</li>
+<li><strong>Interfaces:</strong> Uso de <code>Equipavel</code> para definir um contrato que itens vestíveis devem seguir.</li>
+<li><strong>Composição:</strong> O <code>Heroi</code> <em>tem um</em> <code>Inventario</code>, que por sua vez <em>tem uma lista</em> de <code>Item</code>.</li>
+</ul>
+</details>
+<details>
+<summary><strong>💾 Camada de Persistência e Padrão CRUD (Clique para expandir)</strong></summary>
+<br>
+<p>A capacidade de salvar e carregar o progresso é crucial para a experiência do jogador. Este projeto implementa uma camada de persistência de dados utilizando um banco de dados <strong>SQLite</strong>, orquestrada através do padrão de arquitetura <strong>CRUD</strong>.</p>
+<h3 id="o-que-é-crud">O que é CRUD?</h3>
+<p>CRUD é um acrônimo para as quatro operações essenciais que uma aplicação realiza sobre dados persistentes. É a base para a maioria das aplicações que interagem com bancos de dados.</p>
+<ul>
+<li><strong>CREATE (Criar):</strong> Adicionar novos registros no banco de dados.</li>
+<li><strong>READ (Ler):</strong> Consultar dados que já existem no banco.</li>
+<li><strong>UPDATE (Atualizar):</strong> Modificar um registro existente.</li>
+<li><strong>DELETE (Deletar):</strong> Remover permanentemente um registro.</li>
+</ul>
+<h3 id="implementação-no-projeto">Implementação no Projeto</h3>
+<p>A classe <code>RepositorioDeHerois</code> é a responsável por traduzir as necessidades do jogo em comandos para o banco de dados, aplicando concretamente cada uma das operações CRUD.</p>
+<h4 id="create-salvando-um-novo-herói">CREATE: Salvando um Novo Herói</h4>
+<p>Quando o jogador cria um novo personagem, o método <code>salvar()</code> é invocado para inserir os dados do novo herói na tabela.</p>
+<pre><code class="language-java"><span class="hljs-comment">// Em: src/main/java/com/guiccr/rpg/repository/RepositorioDeHerois.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">salvarHeroi</span><span class="hljs-params">(Heroi heroi)</span> {
+        garantirColunaVidaAtual(); <span class="hljs-comment">// Garantir que a coluna existe antes de salvar</span>
+        garantirTabelaInventario(); <span class="hljs-comment">// Garantir que a tabela de inventário existe</span>
+        <span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;INSERT OR REPLACE INTO herois (nome, vida_atual, vida_maxima, ataque, defesa, chance_critico, multiplicador_critico, chance_esquiva, energia, forca, agilidade, vigor, presenca, intelecto, nivel, experiencia_atual, experiencia_para_proximo_nivel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)&quot;</span>;
+        <span class="hljs-keyword">try</span> (<span class="hljs-type">Connection</span> <span class="hljs-variable">conexao</span> <span class="hljs-operator">=</span> DriverManager.getConnection(URL_JDBC);
+             <span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">preparedStatement</span> <span class="hljs-operator">=</span> conexao.prepareStatement(sql)) {
+            preparedStatement.setString(<span class="hljs-number">1</span>, heroi.getNome());
+                 <span class="hljs-comment">// outros sets....</span>
+             } <span class="hljs-keyword">catch</span> (SQLException e) {
+            System.err.println(<span class="hljs-string">&quot;Erro ao salvar o herói no banco de dados: &quot;</span> + e.getMessage());
+        }
+</code></pre>
+<h4 id="read-carregando-heróis-salvos">READ: Carregando Heróis Salvos</h4>
+<p>Para que o jogador possa continuar uma aventura, o método <code>buscarTodos()</code> consulta e retorna uma lista com todos os heróis salvos.</p>
+<pre><code class="language-java"><span class="hljs-comment">// Em: src/main/java/com/guiccr/rpg/repository/RepositorioDeHerois.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Optional&lt;Heroi&gt; <span class="hljs-title function_">buscarHeroi</span><span class="hljs-params">(String nome)</span> {
+        garantirColunaVidaAtual(); <span class="hljs-comment">// Garantir que a coluna existe antes de buscar</span>
+        <span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;SELECT * FROM herois WHERE nome = ?;&quot;</span>;
+        <span class="hljs-keyword">try</span> (<span class="hljs-type">Connection</span> <span class="hljs-variable">conexao</span> <span class="hljs-operator">=</span> DriverManager.getConnection(URL_JDBC);
+             <span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">preparedStatement</span> <span class="hljs-operator">=</span> conexao.prepareStatement(sql)) {
+            preparedStatement.setString(<span class="hljs-number">1</span>, nome);
+            <span class="hljs-keyword">try</span> (<span class="hljs-type">ResultSet</span> <span class="hljs-variable">resultado</span> <span class="hljs-operator">=</span> preparedStatement.executeQuery()) {
+                <span class="hljs-keyword">if</span> (resultado.next()) {
+                    <span class="hljs-type">Heroi</span> <span class="hljs-variable">heroiEncontrado</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Heroi</span>(
+                        resultado.getInt(<span class="hljs-string">&quot;id&quot;</span>),
+                    resultado.getString(<span class="hljs-string">&quot;nome&quot;</span>),
+                 <span class="hljs-comment">// outros getters.....</span>
+                 <span class="hljs-keyword">return</span> Optional.of(heroiEncontrado));
+                }
+            }
+            <span class="hljs-keyword">return</span> Optional.empty();
+        } <span class="hljs-keyword">catch</span> (SQLException e) {
+            System.err.println(<span class="hljs-string">&quot;Erro ao buscar herói no banco de dados: &quot;</span> + e.getMessage());
+            e.printStackTrace();
+            <span class="hljs-keyword">return</span> Optional.empty();
+        }
+    }
+</code></pre>
+<h4 id="update-atualizando-o-progresso-do-herói">UPDATE: Atualizando o Progresso do Herói</h4>
+<p>Após uma batalha ou ao subir de nível, o método <code>atualizar()</code> é chamado para persistir as novas informações (nível, experiência, vida, etc.) do herói no banco.</p>
+<pre><code class="language-java"><span class="hljs-comment">// Em: src/main/java/com/guiccr/rpg/repository/RepositorioDeHerois.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">atualizarHeroi</span><span class="hljs-params">(Heroi heroi)</span> {
+        garantirColunaVidaAtual(); <span class="hljs-comment">// Garantir que a coluna existe antes de atualizar</span>
+        <span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;UPDATE herois SET &quot;</span> +
+                     <span class="hljs-string">&quot;nome = ?, vida_atual = ?, vida_maxima = ?, ataque = ?, defesa = ?, chance_critico = ?, &quot;</span> +
+                     <span class="hljs-string">&quot;multiplicador_critico = ?, chance_esquiva = ?, energia = ?, forca = ?, &quot;</span> +
+                     <span class="hljs-string">&quot;agilidade = ?, vigor = ?, presenca = ?, intelecto = ?, nivel = ?, &quot;</span> +
+                     <span class="hljs-string">&quot;experiencia_atual = ?, experiencia_para_proximo_nivel = ? &quot;</span> +
+                     <span class="hljs-string">&quot;WHERE nome = ?;&quot;</span>;
+        <span class="hljs-keyword">try</span> (<span class="hljs-type">Connection</span> <span class="hljs-variable">conexao</span> <span class="hljs-operator">=</span> DriverManager.getConnection(URL_JDBC);
+             <span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">preparedStatement</span> <span class="hljs-operator">=</span> conexao.prepareStatement(sql)) {
+            preparedStatement.setString(<span class="hljs-number">1</span>, heroi.getNome());
+             <span class="hljs-comment">// outros getters....</span>
+             }} <span class="hljs-keyword">catch</span> (SQLException e) {
+            System.err.println(<span class="hljs-string">&quot;Erro ao atualizar o herói no banco de dados: &quot;</span> + e.getMessage());
+        }
+    }
+             
+</code></pre>
+<h4 id="delete-excluindo-um-herói">DELETE: Excluindo um Herói</h4>
+<p>Quando o jogador escolhe excluir um personagem, o método <code>excluir()</code> executa o comando <code>DELETE</code> para remover o registro do herói do banco de dados.</p>
+<pre><code class="language-java"><span class="hljs-comment">// Em: src/main/java/com/guiccr/rpg/repository/RepositorioDeHerois.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">deletarHeroi</span><span class="hljs-params">(String nome)</span> {
+        <span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;DELETE FROM herois WHERE nome = ?;&quot;</span>;
+        <span class="hljs-keyword">try</span> (<span class="hljs-type">Connection</span> <span class="hljs-variable">conexao</span> <span class="hljs-operator">=</span> DriverManager.getConnection(URL_JDBC);
+             <span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">preparedStatement</span> <span class="hljs-operator">=</span> conexao.prepareStatement(sql)) {
+            preparedStatement.setString(<span class="hljs-number">1</span>, nome);
+            <span class="hljs-type">int</span> <span class="hljs-variable">linhasAfetadas</span> <span class="hljs-operator">=</span> preparedStatement.executeUpdate();
+            <span class="hljs-keyword">if</span> (linhasAfetadas &gt; <span class="hljs-number">0</span>) System.out.println(<span class="hljs-string">&quot;Herói &quot;</span> + nome + <span class="hljs-string">&quot; deletado com sucesso!&quot;</span>);
+            <span class="hljs-keyword">else</span> System.out.println(<span class="hljs-string">&quot;Nenhum herói encontrado com o nome &quot;</span> + nome + <span class="hljs-string">&quot; para ser deletado.&quot;</span>);
+        } <span class="hljs-keyword">catch</span> (SQLException e) {
+            System.err.println(<span class="hljs-string">&quot;Erro ao deletar o herói do banco de dados: &quot;</span> + e.getMessage());
+        }
+    }
+</code></pre>
+</details>
+<details>
+<summary><strong>💻 Stack de Desenvolvimento e Ferramentas</strong></summary>
+<ul>
+<li><strong>Linguagem:</strong> <code>Java 17+</code></li>
+<li><strong>Banco de Dados:</strong> <code>SQLite</code> para persistência de dados local e sem necessidade de servidor.</li>
+<li><strong>Conectividade DB:</strong> <code>JDBC</code> (Java Database Connectivity) para comunicação com o SQLite.</li>
+<li><strong>Controle de Versão:</strong> <code>Git</code> e <code>GitHub</code>.</li>
+<li><strong>Build/Execução:</strong> Scripts (<code>.bat</code>) para facilitar a compilação e execução.</li>
+</ul>
+</details>
+<details>
+<summary><strong>🏛️ Arquitetura e Boas Práticas</strong></summary>
+<ul>
+<li><strong>Repository Pattern:</strong> A classe <code>RepositorioDeHerois</code> isola toda a lógica de acesso a dados, separando as regras de negócio da persistência.</li>
+<li><strong>Tratamento de Exceções:</strong> Uso de <code>try-catch</code> para lidar com erros de SQL e entrada de usuário.</li>
+<li><strong>Código Limpo:</strong> Foco em nomes de variáveis e métodos claros e uma estrutura de pacotes organizada.</li>
+</ul>
+</details>
+<hr>
+<h2 id="-comece-a-jogar-em-5-minutos">🚀 Comece a Jogar em 5 Minutos</h2>
+<p>Siga os passos abaixo para mergulhar na aventura.</p>
+<h3 id="-pré-requisitos"><strong>📋 Pré-requisitos</strong></h3>
+<ol>
+<li><strong>Java Development Kit (JDK) 17 ou superior:</strong> <a href="https://www.oracle.com/java/technologies/downloads/">Faça o download aqui</a>.
+<ul>
+<li><em>Verificação:</em> Abra seu terminal e digite <code>java --version</code>.</li>
+</ul>
+</li>
+<li><strong>Git (Opcional):</strong> <a href="https://git-scm.com/downloads">Faça o download aqui</a>.</li>
+</ol>
+<h3 id="️-executando-o-jogo"><strong>▶️ Executando o Jogo</strong></h3>
+<details>
+<summary><strong>Método 1: Para Jogadores (Windows - O Mais Fácil)</strong></summary>
+<ol>
+<li>Baixe o projeto como <strong>ZIP</strong> e extraia a pasta.</li>
+<li>Entre na pasta extraída.</li>
+<li>Execute o arquivo <code>Jogar.bat</code> com um duplo clique.</li>
+<li>O script cuidará da compilação e execução. Divirta-se! 🎮</li>
+</ol>
+</details>
+<details>
+<summary><strong>Método 2: Para Desenvolvedores (Multiplataforma)</strong></summary>
+<ol>
+<li><strong>Clone o repositório:</strong><pre><code class="language-bash">git <span class="hljs-built_in">clone</span> [https://github.com/gui-ccr/rpg-batalha-console-java.git](https://github.com/gui-ccr/rpg-batalha-console-java.git)
+<span class="hljs-built_in">cd</span> rpg-batalha-console-java
+</code></pre>
+</li>
+<li><strong>Compile o código:</strong><pre><code class="language-bash"><span class="hljs-comment"># Para Linux/Mac</span>
+javac -d target/classes -<span class="hljs-built_in">cp</span> <span class="hljs-string">&quot;lib/*&quot;</span> src/main/java/com/guiccr/rpg/*.java
+
+<span class="hljs-comment"># Para Windows (PowerShell)</span>
+javac -d target/classes -<span class="hljs-built_in">cp</span> <span class="hljs-string">&quot;lib\*&quot;</span> src\main\java\com\guiccr\rpg\*.java
+</code></pre>
+</li>
+<li><strong>Execute o jogo:</strong><pre><code class="language-bash"><span class="hljs-comment"># Para Linux/Mac</span>
+java -<span class="hljs-built_in">cp</span> <span class="hljs-string">&quot;target/classes:lib/*&quot;</span> com.guiccr.rpg.Main
+
+<span class="hljs-comment"># Para Windows (PowerShell)</span>
+java -<span class="hljs-built_in">cp</span> <span class="hljs-string">&quot;target\classes;lib\*&quot;</span> com.guiccr.rpg.Main
+</code></pre>
+</li>
+</ol>
+</details>
+<hr>
+<h2 id="-galeria-do-jogo">📸 Galeria do Jogo</h2>
+<div align="center">
+    <img src="file:///c:\Users\Itec Minasvix 3\Documents\rpg-batalha-console-java-v2\assets\Menu Principal.png" alt="Menu Principal" width="45%">
+    <img src="file:///c:\Users\Itec Minasvix 3\Documents\rpg-batalha-console-java-v2\assets\Tela de Batalha.png" alt="Tela de Batalha" width="45%">
+    <img src="https://github.com/gui-ccr/rpg-batalha-console-java/blob/main/assets/levelup.png?raw=true" alt="Tela de Level Up" width="45%">
+    <img src="https://github.com/gui-ccr/rpg-batalha-console-java/blob/main/assets/inventario.png?raw=true" alt="Inventário" width="45%">
+</div>
+<hr>
+<h2 id="-estrutura-do-projeto">📂 Estrutura do Projeto</h2>
+<p>A estrutura de pastas foi organizada para separar responsabilidades, seguindo as convenções do Maven.</p>
+<pre><code>rpg-batalha-console-java/
+├── .github/          # (Opcional) Para templates de Issues, PRs, etc.
+├── assets/           # Imagens e GIFs para o README
+├── db/               # Scripts e banco de dados
+├── lib/              # Dependências .jar (JDBC Driver)
+├── src/
+│   └── main/java/com/guiccr/rpg/
+│       ├── Main.java                # Ponto de entrada
+│       ├── model/                   # Pacote para entidades (Heroi, Monstro)
+│       ├── repository/              # Pacote para acesso a dados
+│       └── service/                 # Pacote para regras de negócio (Batalha)
+├── target/           # Classes compiladas (gerado automaticamente)
+├── .gitignore
+├── Jogar.bat         # Script de execução para Windows
+├── LICENSE
+└── README.md
+</code></pre>
+<hr>
+<h2 id="-roadmap-de-desenvolvimento">📈 Roadmap de Desenvolvimento</h2>
+<p>O projeto segue um plano de desenvolvimento claro, com futuras expansões já idealizadas.</p>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> <strong>Fase 0: Infraestrutura:</strong> Estrutura de pastas, README e licença.</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> <strong>Fase 1: Mecânicas de Jogo:</strong> Sistema de combate, nomes dinâmicos e UI.</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> <strong>Fase 2: Expansão POO:</strong> Level up, inventário, itens e habilidades.</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> <strong>Fase 3: Persistência:</strong> Implementação completa de Salvar/Carregar com SQLite.</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> <strong>Fase 4: Refatoração e Qualidade:</strong>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Adicionar testes unitários (JUnit).</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> Refatorar para pacotes de <code>model</code>, <code>service</code> e <code>repository</code>.</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Implementar um sistema de Log (ex: Log4j).</li>
+</ul>
+</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> <strong>Fase 5: Futuras Funcionalidades:</strong>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Sistema de classes de Herói (Guerreiro, Mago).</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Múltiplos tipos de monstros.</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Masmorras com múltiplas batalhas.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="️-aviso-legal-e-créditos">⚠️ Aviso Legal e Créditos</h2>
+<p>Este projeto é um <strong>trabalho de fã e de estudo</strong>, <strong>não oficial</strong> e <strong>não possui afiliação ou endosso</strong> por Rafael Lange Severino &quot;Cellbit&quot; ou pela Ordem Paranormal RPG. Ele é uma homenagem e um exercício de programação inspirado na rica temática e conceitos do universo de Ordem Paranormal. Todos os direitos sobre a obra original pertencem aos seus respectivos criadores.</p>
+<hr>
+<h2 id="-licença">📄 Licença</h2>
+<p>Este projeto está sob a licença <a href="LICENSE">MIT License</a>.</p>
+
+            
+            
+        </body>
+        </html>
