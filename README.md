@@ -153,9 +153,9 @@ Siga os passos abaixo para mergulhar na aventura.
 ## 📸 Galeria do Jogo
 
 <div align="center">
-    <img src="assets/Menu Principal.png" alt="Menu Principal" width="45%">
     <img src="assets/Tela de Batalha.png" alt="Tela de Batalha" width="45%">
-    <img src="assets/Inventario" alt="Inventário" width="45%">
+    <img src="assets/Inventario.png" alt="Inventário" width="45%">
+    <img src="assets/Menu Principal.png" alt="Menu Principal" width="45%">
 </div>
 
 ---
