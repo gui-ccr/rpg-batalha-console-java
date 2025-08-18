@@ -5,12 +5,11 @@
     "java.project.sourcePaths": [
         "src/main/java"
     ],
-    "java.project.outputPath": "target/classes",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
     ],
     "files.exclude": {
-        "**/target": true,
+        "**/target": false,
         "**/.git": true,
         "**/.DS_Store": true
     },
