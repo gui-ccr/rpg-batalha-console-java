@@ -1,3 +1,4 @@
+-- Alterado para commit separado em 18/08/2025
 CREATE TABLE herois (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL UNIQUE,

@@ -1,3 +1,4 @@
+-- Alterado para commit separado em 18/08/2025
 -- Script para adicionar a coluna vida_atual na tabela herois
 ALTER TABLE herois ADD COLUMN vida_atual INTEGER NOT NULL DEFAULT 0;
 
