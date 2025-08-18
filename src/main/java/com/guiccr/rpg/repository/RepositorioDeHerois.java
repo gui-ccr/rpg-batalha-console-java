@@ -1,4 +1,5 @@
 package com.guiccr.rpg.repository;
+// Arquivo movido para o pacote repository em 18/08/2025
 
 import java.sql.Connection;
 import java.sql.DriverManager;
