@@ -43,7 +43,7 @@
       - [READ: Carregando Heróis Salvos](#read-carregando-heróis-salvos)
       - [UPDATE: Atualizando o Progresso do Herói](#update-atualizando-o-progresso-do-herói)
       - [DELETE: Excluindo um Herói](#delete-excluindo-um-herói)
-  - [📚 Quer se Aprofundar? Acesse a Wiki!](https://github.com/gui-ccr/rpg-batalha-console-java/wiki)
+  - [📚 Acesse a Wiki!](#acesse-a-wiki)
   - [🚀 Comece a Jogar em 5 Minutos](#-comece-a-jogar-em-5-minutos)
     - [**📋 Pré-requisitos**](#-pré-requisitos)
     - [**▶️ Executando o Jogo**](#️-executando-o-jogo)
@@ -311,7 +311,7 @@ rpg-batalha-console-java/
 ```
 
 ---
-## 📚 Quer se Aprofundar? Acesse a Wiki!
+## 📚 Acesse a Wiki!
 
 Este `README` oferece uma visão geral do projeto. Para um mergulho profundo na **arquitetura**, nas **mecânicas de jogo**, no **diagrama de classes UML** e em outras documentações técnicas, a **Wiki** do projeto é o seu destino!
 
