@@ -1,27 +1,21 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
             "type": "java",
-            "name": "Main",
+            "name": "Jogar RPG (Main)",
             "request": "launch",
             "mainClass": "com.guiccr.rpg.Main",
-            "projectName": "rpg-batalha-console-java-v2_707db21f"
-        },
-        {
-            "type": "java",
-            "name": "🎮 Executar RPG Batalha Console",
-            "request": "launch",
-            "mainClass": "com.guiccr.rpg.Main",
-            "projectName": "rpg-batalha-console-java",
-            "classPaths": [
-                "${workspaceFolder}/target/classes",
-                "${workspaceFolder}/lib/*"
-            ],
+            "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
             "args": [],
             "vmArgs": [],
-            "preLaunchTask": "Compilar projeto"
+            "preLaunchTask": "Compilar projeto",
+            "classPaths": [
+                "${workspaceFolder}/target/classes",
+                "${workspaceFolder}/lib/sqlite-jdbc-3.50.3.0.jar"
+            ]
         }
     ]
 }
