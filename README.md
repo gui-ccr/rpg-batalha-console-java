@@ -155,8 +155,7 @@ Siga os passos abaixo para mergulhar na aventura.
 <div align="center">
     <img src="assets/Menu Principal.png" alt="Menu Principal" width="45%">
     <img src="assets/Tela de Batalha.png" alt="Tela de Batalha" width="45%">
-    <img src="https://github.com/gui-ccr/rpg-batalha-console-java/blob/main/assets/levelup.png?raw=true" alt="Tela de Level Up" width="45%">
-    <img src="https://github.com/gui-ccr/rpg-batalha-console-java/blob/main/assets/inventario.png?raw=true" alt="Inventário" width="45%">
+    <img src="assets/Inventario" alt="Inventário" width="45%">
 </div>
 
 ---
