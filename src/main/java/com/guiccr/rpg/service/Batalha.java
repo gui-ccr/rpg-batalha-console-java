@@ -1,4 +1,5 @@
 package com.guiccr.rpg.service;
+// Arquivo movido para o pacote service em 18/08/2025
 
 import java.util.InputMismatchException; // Para tratar entrada de Scanner
 import java.util.Scanner; // Para entrada do usuário
