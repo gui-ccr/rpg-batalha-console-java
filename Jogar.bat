@@ -1,3 +1,4 @@
+:: Alterado para commit separado em 18/08/2025
 @echo off
 title RPG Batalha Console
 
