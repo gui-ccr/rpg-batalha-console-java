@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "com.guiccr.rpg.Main",
+            "projectName": "rpg-batalha-console-java-v2_707db21f"
+        },
+        {
+            "type": "java",
             "name": "🎮 Executar RPG Batalha Console",
             "request": "launch",
             "mainClass": "com.guiccr.rpg.Main",

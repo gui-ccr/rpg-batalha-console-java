@@ -1,6 +1,15 @@
 package com.guiccr.rpg;
 
 import java.util.Scanner; // Importar Scanner
+
+import com.guiccr.rpg.model.Espada;
+import com.guiccr.rpg.model.Heroi;
+import com.guiccr.rpg.model.Inventario;
+import com.guiccr.rpg.model.Monstro;
+import com.guiccr.rpg.model.PocaoVida;
+import com.guiccr.rpg.repository.RepositorioDeHerois;
+import com.guiccr.rpg.service.Batalha;
+
 import java.util.Optional;
 
 public class Main {
@@ -27,7 +36,7 @@ public class Main {
                     // Cria um novo herói com o inventário
 
                     // Crie instâncias de Heroi e Monstro AQUI (usando GeradorDeNomes)
-                    Heroi heroi_principal = new Heroi(nomeAleatorioHeroi, 12, 3, 6, 3, 4, 20, inventario );
+                    Heroi heroi_principal = new Heroi(nomeAleatorioHeroi, 6, 3, 6, 3, 4, 20, inventario );
                     Monstro monstro_g0 = new Monstro(nomeAleatorioMonstro, 110, 20, 10, 10, 1.4, 15, "Criatura");
                     RepositorioDeHerois.salvarHeroi(heroi_principal);
 

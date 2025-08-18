@@ -25,7 +25,7 @@ echo Java OK!
 echo Compilando jogo...
 
 if not exist "target\classes" mkdir target\classes >nul 2>&1
-javac -d target\classes -cp "lib/*" src\main\java\com\guiccr\rpg\*.java >nul 2>&1
+javac -d target\classes -cp "lib/*" src\main\java\com\guiccr\rpg\*.java src\main\java\com\guiccr\rpg\model\*.java src\main\java\com\guiccr\rpg\service\*.java src\main\java\com\guiccr\rpg\repository\*.java >nul 2>&1
 if errorlevel 1 (
     echo ERRO na compilacao!
     pause
