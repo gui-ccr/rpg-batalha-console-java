@@ -8,10 +8,10 @@
 
 <div align="center">
 
-<img src="https://img.shields.io/badge/Java-17+-007396?style=flat-square&logo=java&logoColor=white" alt="Java 17+">
-<img src="https://img.shields.io/badge/Database-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite">
-<img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License MIT">
-<img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange?style=flat-square" alt="Status">
+<img src="https://img.shields.io/badge/Java-17+-007396?style=plastic&logo=java&logoColor=white" alt="Java 17+">
+<img src="https://img.shields.io/badge/Database-SQLite-003B57?style=plastic&logo=sqlite&logoColor=white" alt="SQLite">
+<img src="https://img.shields.io/badge/License-MIT-green?style=plastic" alt="License MIT">
+<img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange?style=plastic" alt="Status">
 
 </div>
 
